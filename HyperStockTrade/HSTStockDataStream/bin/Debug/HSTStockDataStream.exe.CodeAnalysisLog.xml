@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="c:\program files (x86)\microsoft visual studio 12.0\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
+<FxCopReport Version="12.0">
+ <Targets>
+  <Target Name="C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTStockDataStream\bin\Debug\HSTStockDataStream.exe">
+   <Modules>
+    <Module Name="hststockdatastream.exe">
+     <Namespaces>
+      <Namespace Name="HSTStockDataStream.Routine.Download">
+       <Types>
+        <Type Name="StockDataDownloader" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#GetTopicsFromKDB()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="RethrowToPreserveStackDetails" Category="Microsoft.Usage" CheckId="CA2200" Status="Active" Created="2016-10-31 16:03:34Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Error" Path="c:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTStockDataStream\Routine\Download" File="StockDataDownloader.cs" Line="121">'StockDataDownloader.GetTopicsFromKDB()' はキャッチされた例外を再度スローし、その例外を引数として明示的に指定します。最初に例外が発生したスタックの場所を保持するためには、'throw' を引数なしで使用してください。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+ </Targets>
+ <Rules>
+  <Rule TypeName="RethrowToPreserveStackDetails" Category="Microsoft.Usage" CheckId="CA2200">
+   <Name>スタック詳細を保持するために再度スローします。</Name>
+   <Description>キャッチされた例外が再度発生したときに、元のスタック詳細を保持するために IL rethrow 命令を使用します。</Description>
+   <Resolution Name="Default">{0} はキャッチされた例外を再度スローし、その例外を引数として明示的に指定します。最初に例外が発生したスタックの場所を保持するためには、'throw' を引数なしで使用してください。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182363.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Error</MessageLevel>
+   <File Name="usagerules.dll" Version="12.0.0.0" />
+  </Rule>
+ </Rules>
+ <Localized>
+  <String Key="Category">カテゴリ</String>
+  <String Key="Certainty">確実性</String>
+  <String Key="CollapseAll">すべて折りたたみ</String>
+  <String Key="CheckId">ID の確認</String>
+  <String Key="Error">エラー</String>
+  <String Key="Errors">エラー</String>
+  <String Key="ExpandAll">すべて展開</String>
+  <String Key="Help">ヘルプ</String>
+  <String Key="Line">行</String>
+  <String Key="Messages">メッセージ</String>
+  <String Key="LocationNotStoredInPdb">[場所は Pdb に格納されていません]</String>
+  <String Key="Project">プロジェクト</String>
+  <String Key="Resolution">解像度</String>
+  <String Key="Rule">ルール</String>
+  <String Key="RuleFile">規則ファイル</String>
+  <String Key="RuleDescription">規則の説明</String>
+  <String Key="Source">ソース</String>
+  <String Key="Status">状態</String>
+  <String Key="Target">ターゲット</String>
+  <String Key="Warning">警告</String>
+  <String Key="Warnings">警告</String>
+  <String Key="ReportTitle">コード分析レポート</String>
+ </Localized>
+</FxCopReport>

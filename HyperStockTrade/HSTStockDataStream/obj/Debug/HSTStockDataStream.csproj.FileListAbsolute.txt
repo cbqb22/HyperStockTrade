@@ -1,0 +1,25 @@
+C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTStockDataStream\bin\Debug\HSTStockDataStream.exe.config
+C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTStockDataStream\bin\Debug\HSTStockDataStream.exe
+C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTStockDataStream\bin\Debug\HSTStockDataStream.pdb
+C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTStockDataStream\bin\Debug\HSTCommon.dll
+C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTStockDataStream\bin\Debug\HSTDB.dll
+C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTStockDataStream\bin\Debug\HSTMarketSpeed.exe
+C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTStockDataStream\bin\Debug\NDde.dll
+C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTStockDataStream\bin\Debug\HSTCommon.pdb
+C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTStockDataStream\bin\Debug\HSTDB.pdb
+C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTStockDataStream\bin\Debug\HSTMarketSpeed.pdb
+C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTStockDataStream\obj\Debug\HSTStockDataStream.csprojResolveAssemblyReference.cache
+C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTStockDataStream\obj\Debug\MainWindow.baml
+C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTStockDataStream\obj\Debug\MainWindow.g.cs
+C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTStockDataStream\obj\Debug\App.g.cs
+C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTStockDataStream\obj\Debug\HSTStockDataStream_MarkupCompile.cache
+C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTStockDataStream\obj\Debug\HSTStockDataStream.g.resources
+C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTStockDataStream\obj\Debug\HSTStockDataStream.Properties.Resources.resources
+C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTStockDataStream\obj\Debug\HSTStockDataStream.csproj.GenerateResource.Cache
+C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTStockDataStream\obj\Debug\HSTStockDataStream.exe
+C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTStockDataStream\obj\Debug\HSTStockDataStream.pdb
+C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTStockDataStream\bin\Debug\HSTStockDataStream.exe.CodeAnalysisLog.xml
+C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTStockDataStream\bin\Debug\HSTStockDataStream.exe.lastcodeanalysissucceeded
+C:\Users\poohace\Documents\HyperStockTrade\HyperStockTrade\HSTStockDataStream\bin\Debug\HSTStockDataStream.exe.config
+C:\Users\poohace\Documents\HyperStockTrade\HyperStockTrade\HSTStockDataStream\obj\Debug\HSTStockDataStream.exe
+C:\Users\poohace\Documents\HyperStockTrade\HyperStockTrade\HSTStockDataStream\obj\Debug\HSTStockDataStream.pdb

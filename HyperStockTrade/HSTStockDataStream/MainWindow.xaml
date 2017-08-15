@@ -1,0 +1,24 @@
+﻿<Window x:Class="HSTStockDataStream.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="450" Width="525"
+        WindowStartupLocation="CenterScreen">
+    
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="300" />
+            <Setter Property="Height" Value="80" />
+        </Style>
+        
+    </Window.Resources>
+    <Grid>
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+            <Button x:Name="btnStartKDBDownload" Content="KDBダウンロード" Click="btnStartKDBDownload_Click"/>
+            <Button x:Name="btnStartMSDownload" Content="MSダウンロード" Click="btnStartMSDownload_Click"/>
+            <Button x:Name="btnStartDownload6months" Content="過去６ヶ月分ダウンロード" Click="btnStartKDBDownload6months_Click"/>
+            <Button x:Name="btnStartInsert" Content="データ挿入" Click="btnStartInsert_Click"/>
+            <Button x:Name="btnStartRoutine" Content="ルーチン開始" Click="btnStartRoutine_Click"/>
+        </StackPanel>
+        
+    </Grid>
+</Window>

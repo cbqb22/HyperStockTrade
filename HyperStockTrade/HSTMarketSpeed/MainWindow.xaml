@@ -1,0 +1,8 @@
+﻿<Window x:Class="HSTMarketSpeed.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Button x:Name="btnStart" Content="開始" Click="btnStart_Click"/>
+    </Grid>
+</Window>

@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="c:\program files (x86)\microsoft visual studio 12.0\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
+<FxCopReport Version="12.0">
+ <Targets>
+  <Target Name="C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTMarketSpeed\bin\Debug\HSTMarketSpeed.exe">
+   <Modules>
+    <Module Name="hstmarketspeed.exe">
+     <Namespaces>
+      <Namespace Name="HSTMarketSpeed.Routine">
+       <Types>
+        <Type Name="MSLoginHelper" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#FindWindow(System.String,System.String)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2016-10-31 16:03:28Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">'MSLoginHelper.FindWindow(string, string)' は P/Invoke メソッドであるため、NativeMethods、SafeNativeMethods または UnsafeNativeMethods に名前指定されたクラスで定義しなければなりません。</Issue>
+            </Message>
+            <Message TypeName="PInvokesShouldNotBeVisible" Category="Microsoft.Interoperability" CheckId="CA1401" Status="Active" Created="2016-10-31 16:03:28Z" FixCategory="Breaking">
+             <Issue Certainty="50" Level="CriticalError">P/Invoke 'MSLoginHelper.FindWindow(string, string)' の外部から可視できないように、アクセシビリティを変更します。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#FindWindowEx(System.IntPtr,System.IntPtr,System.String,System.String)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2016-10-31 16:03:28Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">'MSLoginHelper.FindWindowEx(IntPtr, IntPtr, string, string)' は P/Invoke メソッドであるため、NativeMethods、SafeNativeMethods または UnsafeNativeMethods に名前指定されたクラスで定義しなければなりません。</Issue>
+            </Message>
+            <Message TypeName="PInvokesShouldNotBeVisible" Category="Microsoft.Interoperability" CheckId="CA1401" Status="Active" Created="2016-10-31 16:03:28Z" FixCategory="Breaking">
+             <Issue Certainty="50" Level="CriticalError">P/Invoke 'MSLoginHelper.FindWindowEx(IntPtr, IntPtr, string, string)' の外部から可視できないように、アクセシビリティを変更します。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#GetWindow(System.IntPtr,System.Int32)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2016-10-31 16:03:28Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">'MSLoginHelper.GetWindow(IntPtr, int)' は P/Invoke メソッドであるため、NativeMethods、SafeNativeMethods または UnsafeNativeMethods に名前指定されたクラスで定義しなければなりません。</Issue>
+            </Message>
+            <Message TypeName="PInvokesShouldNotBeVisible" Category="Microsoft.Interoperability" CheckId="CA1401" Status="Active" Created="2016-10-31 16:03:28Z" FixCategory="Breaking">
+             <Issue Certainty="50" Level="CriticalError">P/Invoke 'MSLoginHelper.GetWindow(IntPtr, int)' の外部から可視できないように、アクセシビリティを変更します。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#GetWindowRect(System.IntPtr,HSTMarketSpeed.Routine.MSLoginHelper+RECT&amp;)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2016-10-31 16:03:28Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">'MSLoginHelper.GetWindowRect(IntPtr, out MSLoginHelper.RECT)' は P/Invoke メソッドであるため、NativeMethods、SafeNativeMethods または UnsafeNativeMethods に名前指定されたクラスで定義しなければなりません。</Issue>
+            </Message>
+            <Message TypeName="PInvokesShouldNotBeVisible" Category="Microsoft.Interoperability" CheckId="CA1401" Status="Active" Created="2016-10-31 16:03:28Z" FixCategory="Breaking">
+             <Issue Certainty="50" Level="CriticalError">P/Invoke 'MSLoginHelper.GetWindowRect(IntPtr, out MSLoginHelper.RECT)' の外部から可視できないように、アクセシビリティを変更します。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#PostMessage(System.IntPtr,System.UInt32,System.Int32,System.Int32)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2016-10-31 16:03:28Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">'MSLoginHelper.PostMessage(IntPtr, uint, int, int)' は P/Invoke メソッドであるため、NativeMethods、SafeNativeMethods または UnsafeNativeMethods に名前指定されたクラスで定義しなければなりません。</Issue>
+            </Message>
+            <Message Id="2" TypeName="PInvokeDeclarationsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1901" Status="Active" Created="2016-10-31 16:03:28Z" FixCategory="Breaking">
+             <Issue Name="Parameter" Certainty="95" Level="Error">コードに宣言されているとおり、P/Invoke 'MSLoginHelper.PostMessage(IntPtr, uint, int, int)' のパラメーター 'wParam' は 64 ビット プラットフォームで 4 バイトになります。この API の実際のネイティブ宣言は 64 ビット プラットフォームで 8 バイトでなければならないことを示しているため、この状態は正しくありません。'int' の代わりにどのデータ型を使用する必要があるかを判断するには、MSDN プラットフォーム の SDK ドキュメントを参照してください。</Issue>
+            </Message>
+            <Message Id="3" TypeName="PInvokeDeclarationsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1901" Status="Active" Created="2016-10-31 16:03:28Z" FixCategory="Breaking">
+             <Issue Name="Parameter" Certainty="95" Level="Error">コードに宣言されているとおり、P/Invoke 'MSLoginHelper.PostMessage(IntPtr, uint, int, int)' のパラメーター 'lParam' は 64 ビット プラットフォームで 4 バイトになります。この API の実際のネイティブ宣言は 64 ビット プラットフォームで 8 バイトでなければならないことを示しているため、この状態は正しくありません。'int' の代わりにどのデータ型を使用する必要があるかを判断するには、MSDN プラットフォーム の SDK ドキュメントを参照してください。</Issue>
+            </Message>
+            <Message TypeName="PInvokesShouldNotBeVisible" Category="Microsoft.Interoperability" CheckId="CA1401" Status="Active" Created="2016-10-31 16:03:28Z" FixCategory="Breaking">
+             <Issue Certainty="50" Level="CriticalError">P/Invoke 'MSLoginHelper.PostMessage(IntPtr, uint, int, int)' の外部から可視できないように、アクセシビリティを変更します。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#SendMessage(System.IntPtr,System.UInt32,System.IntPtr,System.String)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2016-10-31 16:03:28Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">'MSLoginHelper.SendMessage(IntPtr, uint, IntPtr, string)' は P/Invoke メソッドであるため、NativeMethods、SafeNativeMethods または UnsafeNativeMethods に名前指定されたクラスで定義しなければなりません。</Issue>
+            </Message>
+            <Message TypeName="PInvokesShouldNotBeVisible" Category="Microsoft.Interoperability" CheckId="CA1401" Status="Active" Created="2016-10-31 16:03:28Z" FixCategory="Breaking">
+             <Issue Certainty="50" Level="CriticalError">P/Invoke 'MSLoginHelper.SendMessage(IntPtr, uint, IntPtr, string)' の外部から可視できないように、アクセシビリティを変更します。</Issue>
+            </Message>
+            <Message Id="3" TypeName="SpecifyMarshalingForPInvokeStringArguments" Category="Microsoft.Globalization" CheckId="CA2101" Status="Active" Created="2016-10-31 16:03:28Z" FixCategory="NonBreaking">
+             <Issue Name="Parameter" Certainty="75" Level="Error">セキュリティ上の問題を軽減するには、DllImport.CharSet を CharSet.Unicode に設定するか、またはパラメーターを明示的に UnmanagedType.LPWStr としてマーシャリングすることで、パラメーター 'lParam' を Unicode としてマーシャリングします。この文字列を ANSI またはシステム依存としてマーシャリングする必要がある場合は、セキュリティ強化のために BestFitMapping=false と設定し、さらに ThrowOnUnmappableChar=true と設定します。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="MSStockDataDownloader" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#GetStockDatas(System.Collections.Generic.List`1&lt;System.String&gt;,System.Collections.Generic.List`1&lt;System.String&gt;)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="RethrowToPreserveStackDetails" Category="Microsoft.Usage" CheckId="CA2200" Status="Active" Created="2016-10-31 16:03:28Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Error" Path="c:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTMarketSpeed\Routine" File="MSStockDataDownloader.cs" Line="298">'MSStockDataDownloader.GetStockDatas(List&lt;string&gt;, List&lt;string&gt;)' はキャッチされた例外を再度スローし、その例外を引数として明示的に指定します。最初に例外が発生したスタックの場所を保持するためには、'throw' を引数なしで使用してください。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Request(System.String,System.String,NDde.Client.DdeClient)" Kind="Method" Static="True" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="RethrowToPreserveStackDetails" Category="Microsoft.Usage" CheckId="CA2200" Status="Active" Created="2016-10-31 16:03:28Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Error" Path="c:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTMarketSpeed\Routine" File="MSStockDataDownloader.cs" Line="111">'MSStockDataDownloader.Request(string, string, DdeClient)' はキャッチされた例外を再度スローし、その例外を引数として明示的に指定します。最初に例外が発生したスタックの場所を保持するためには、'throw' を引数なしで使用してください。</Issue>
+             <Issue Certainty="95" Level="Error" Path="c:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTMarketSpeed\Routine" File="MSStockDataDownloader.cs" Line="115">'MSStockDataDownloader.Request(string, string, DdeClient)' はキャッチされた例外を再度スローし、その例外を引数として明示的に指定します。最初に例外が発生したスタックの場所を保持するためには、'throw' を引数なしで使用してください。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+ </Targets>
+ <Rules>
+  <Rule TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060">
+   <Name>P/Invoke を NativeMethods クラスに移動します</Name>
+   <Description>この型は、DllImport 属性を持つメンバーを含んでいます。DllImport 属性を持つメンバーは NativeMethods、SafeNativeMethods、UnsafeNativeMethods と名前付けられたクラス内に含まれていなければなりません。</Description>
+   <Resolution Name="Default">{0} は P/Invoke メソッドであるため、NativeMethods、SafeNativeMethods または UnsafeNativeMethods に名前指定されたクラスで定義しなければなりません。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182161.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">CriticalWarning</MessageLevel>
+   <File Name="designrules.dll" Version="12.0.0.0" />
+  </Rule>
+  <Rule TypeName="PInvokeDeclarationsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1901">
+   <Name>P/Invoke 宣言はポータブルでなければなりません</Name>
+   <Description>.</Description>
+   <Resolution Name="Parameter">コードに宣言されているとおり、P/Invoke {1} のパラメーター {0} は {3} プラットフォームで {2} バイトになります。この API の実際のネイティブ宣言は {3} プラットフォームで {4} バイトでなければならないことを示しているため、この状態は正しくありません。{5} の代わりにどのデータ型を使用する必要があるかを判断するには、MSDN プラットフォーム の SDK ドキュメントを参照してください。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182284(VS.100).aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Error</MessageLevel>
+   <File Name="portabilityrules.dll" Version="12.0.0.0" />
+  </Rule>
+  <Rule TypeName="PInvokesShouldNotBeVisible" Category="Microsoft.Interoperability" CheckId="CA1401">
+   <Name>P/Invoke は参照可能であることはできません</Name>
+   <Description>相互運用機能の階層をパブリックにすることはできません。DllImport 属性は、公開されているアクセス可能なメンバー (public または protected) に適用されることはできません。</Description>
+   <Resolution Name="Default">P/Invoke {0} の外部から可視できないように、アクセシビリティを変更します。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182209.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="50">CriticalError</MessageLevel>
+   <File Name="interoperabilityrules.dll" Version="12.0.0.0" />
+  </Rule>
+  <Rule TypeName="RethrowToPreserveStackDetails" Category="Microsoft.Usage" CheckId="CA2200">
+   <Name>スタック詳細を保持するために再度スローします。</Name>
+   <Description>キャッチされた例外が再度発生したときに、元のスタック詳細を保持するために IL rethrow 命令を使用します。</Description>
+   <Resolution Name="Default">{0} はキャッチされた例外を再度スローし、その例外を引数として明示的に指定します。最初に例外が発生したスタックの場所を保持するためには、'throw' を引数なしで使用してください。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182363.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Error</MessageLevel>
+   <File Name="usagerules.dll" Version="12.0.0.0" />
+  </Rule>
+  <Rule TypeName="SpecifyMarshalingForPInvokeStringArguments" Category="Microsoft.Globalization" CheckId="CA2101">
+   <Name>P/Invoke 文字列引数に対してマーシャリングを指定します</Name>
+   <Description>ANSI (Win9x の場合は Auto) として文字列をマーシャリングする場合、一部の文字は変更されることがあります。最適なマッピングが有効になっている場合、Unicode では異なる表示になる文字列は、同一の ANSI 文字列にマーシャリングされるため、間違ったセキュリティ上の判断に結び付くことがあります。最適なマッピングを無効にすると、対応するものがない文字はすべて '?' にマッピングされるため、このリスクは軽減されます。また、すべての文字列マーシャリングに対して、CharSet.Ansi が既定の設定となっているため、DllImport または StructLayout の CharSet 設定、あるいは Unicode (または システム依存の) UnmanagedType の MarshalAs 属性として、Unicode マーシャリングを明示的に指定する必要があることにも注意してください。</Description>
+   <Resolution Name="Parameter">セキュリティ上の問題を軽減するには、DllImport.CharSet を CharSet.Unicode に設定するか、またはパラメーターを明示的に UnmanagedType.LPWStr としてマーシャリングすることで、パラメーター {0} を Unicode としてマーシャリングします。この文字列を ANSI またはシステム依存としてマーシャリングする必要がある場合は、セキュリティ強化のために BestFitMapping=false と設定し、さらに ThrowOnUnmappableChar=true と設定します。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182319.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="75">Error</MessageLevel>
+   <File Name="globalizationrules.dll" Version="12.0.0.0" />
+  </Rule>
+ </Rules>
+ <Localized>
+  <String Key="Category">カテゴリ</String>
+  <String Key="Certainty">確実性</String>
+  <String Key="CollapseAll">すべて折りたたみ</String>
+  <String Key="CheckId">ID の確認</String>
+  <String Key="Error">エラー</String>
+  <String Key="Errors">エラー</String>
+  <String Key="ExpandAll">すべて展開</String>
+  <String Key="Help">ヘルプ</String>
+  <String Key="Line">行</String>
+  <String Key="Messages">メッセージ</String>
+  <String Key="LocationNotStoredInPdb">[場所は Pdb に格納されていません]</String>
+  <String Key="Project">プロジェクト</String>
+  <String Key="Resolution">解像度</String>
+  <String Key="Rule">ルール</String>
+  <String Key="RuleFile">規則ファイル</String>
+  <String Key="RuleDescription">規則の説明</String>
+  <String Key="Source">ソース</String>
+  <String Key="Status">状態</String>
+  <String Key="Target">ターゲット</String>
+  <String Key="Warning">警告</String>
+  <String Key="Warnings">警告</String>
+  <String Key="ReportTitle">コード分析レポート</String>
+ </Localized>
+</FxCopReport>

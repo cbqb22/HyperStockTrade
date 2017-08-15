@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="c:\program files (x86)\microsoft visual studio 12.0\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
+<FxCopReport Version="12.0">
+ <Targets>
+  <Target Name="C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTDB\bin\Debug\HSTDB.dll">
+   <Modules>
+    <Module Name="hstdb.dll">
+     <Namespaces>
+      <Namespace Name="HSTDB.StockData">
+       <Types>
+        <Type Name="StockDataFull" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ImplementISerializableCorrectly" Category="Microsoft.Usage" CheckId="CA2240" Status="Active" Created="2016-10-31 16:03:18Z" FixCategory="NonBreaking">
+           <Issue Certainty="60" Level="Error">GetObjectData の実装を型 'StockDataFull' に追加します。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="StockDataFull+StockDataFullDataTable" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ImplementISerializableCorrectly" Category="Microsoft.Usage" CheckId="CA2240" Status="Active" Created="2016-10-31 16:03:18Z" FixCategory="NonBreaking">
+           <Issue Certainty="60" Level="Error">GetObjectData の実装を型 'StockDataFull.StockDataFullDataTable' に追加します。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="StockDataFull+StockDataFull解析済データDataTable" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ImplementISerializableCorrectly" Category="Microsoft.Usage" CheckId="CA2240" Status="Active" Created="2016-10-31 16:03:18Z" FixCategory="NonBreaking">
+           <Issue Certainty="60" Level="Error">GetObjectData の実装を型 'StockDataFull.StockDataFull解析済データDataTable' に追加します。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="StockDataFull挿入済株価データ日付" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ImplementISerializableCorrectly" Category="Microsoft.Usage" CheckId="CA2240" Status="Active" Created="2016-10-31 16:03:18Z" FixCategory="NonBreaking">
+           <Issue Certainty="60" Level="Error">GetObjectData の実装を型 'StockDataFull挿入済株価データ日付' に追加します。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="StockDataFull挿入済株価データ日付+StockDataFull挿入済株価データ日付DataTable" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ImplementISerializableCorrectly" Category="Microsoft.Usage" CheckId="CA2240" Status="Active" Created="2016-10-31 16:03:18Z" FixCategory="NonBreaking">
+           <Issue Certainty="60" Level="Error">GetObjectData の実装を型 'StockDataFull挿入済株価データ日付.StockDataFull挿入済株価データ日付DataTable' に追加します。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+ </Targets>
+ <Rules>
+  <Rule TypeName="ImplementISerializableCorrectly" Category="Microsoft.Usage" CheckId="CA2240">
+   <Name>ISerializable を正しく実装します</Name>
+   <Description>型を ISerializable に割り当てることができる場合、GetObjectData を実装しなければなりません。unsealed 型については GetObjectData メソッドが派生型によって呼び出し可能、およびオーバーライド可能でなければなりません。</Description>
+   <Resolution Name="Default">GetObjectData の実装を型 {0} に追加します。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182342.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="60">Error</MessageLevel>
+   <File Name="usagerules.dll" Version="12.0.0.0" />
+  </Rule>
+ </Rules>
+ <Localized>
+  <String Key="Category">カテゴリ</String>
+  <String Key="Certainty">確実性</String>
+  <String Key="CollapseAll">すべて折りたたみ</String>
+  <String Key="CheckId">ID の確認</String>
+  <String Key="Error">エラー</String>
+  <String Key="Errors">エラー</String>
+  <String Key="ExpandAll">すべて展開</String>
+  <String Key="Help">ヘルプ</String>
+  <String Key="Line">行</String>
+  <String Key="Messages">メッセージ</String>
+  <String Key="LocationNotStoredInPdb">[場所は Pdb に格納されていません]</String>
+  <String Key="Project">プロジェクト</String>
+  <String Key="Resolution">解像度</String>
+  <String Key="Rule">ルール</String>
+  <String Key="RuleFile">規則ファイル</String>
+  <String Key="RuleDescription">規則の説明</String>
+  <String Key="Source">ソース</String>
+  <String Key="Status">状態</String>
+  <String Key="Target">ターゲット</String>
+  <String Key="Warning">警告</String>
+  <String Key="Warnings">警告</String>
+  <String Key="ReportTitle">コード分析レポート</String>
+ </Localized>
+</FxCopReport>
