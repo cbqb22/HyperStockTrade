@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commons\ColumnMaxLength.cs" />
+    <Compile Include="Commons\Enums\MarketCodes.cs" />
     <Compile Include="Connection\DataContexts\DataContext.cs" />
     <Compile Include="Connection\DataContexts\DataContextBase.cs" />
     <Compile Include="Connection\DataContexts\DbEntityExtension.cs" />
@@ -61,6 +62,8 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Constants\ColumnTypeName.cs" />
     <Compile Include="Models\_Version.cs" />
+    <Compile Include="Models\StockCompany.cs" />
+    <Compile Include="Models\DailyPrice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
