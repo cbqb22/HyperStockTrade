@@ -16,3 +16,6 @@ C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTMarket
 C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTMarketSpeed\obj\Debug\HSTMarketSpeed.pdb
 C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTMarketSpeed\bin\Debug\HSTMarketSpeed.exe.CodeAnalysisLog.xml
 C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTMarketSpeed\bin\Debug\HSTMarketSpeed.exe.lastcodeanalysissucceeded
+C:\Users\m_mikami\Documents\HST\HyperStockTrade\HSTMarketSpeed\bin\Debug\HSTMarketSpeed.exe.config
+C:\Users\m_mikami\Documents\HST\HyperStockTrade\HSTMarketSpeed\obj\Debug\HSTMarketSpeed.exe
+C:\Users\m_mikami\Documents\HST\HyperStockTrade\HSTMarketSpeed\obj\Debug\HSTMarketSpeed.pdb
