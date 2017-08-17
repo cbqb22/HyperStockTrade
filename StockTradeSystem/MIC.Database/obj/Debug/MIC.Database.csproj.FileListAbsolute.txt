@@ -9,4 +9,17 @@ C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\obj\Debug\MIC.Data
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\obj\Debug\MIC.Database.pdb
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\obj\Debug\MIC.Database.Migrations.AddVersionTable.resources
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\obj\Debug\MIC.Database.csproj.GenerateResource.Cache
+C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\GalaSoft.MvvmLight.dll
+C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\GalaSoft.MvvmLight.Extras.dll
+C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\GalaSoft.MvvmLight.Platform.dll
+C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\GalaSoft.MvvmLight.pdb
+C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\GalaSoft.MvvmLight.xml
+C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\GalaSoft.MvvmLight.Extras.pdb
+C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\GalaSoft.MvvmLight.Extras.xml
+C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
+C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\GalaSoft.MvvmLight.Platform.xml
+C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\Microsoft.Practices.ServiceLocation.xml
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\obj\Debug\MIC.Database.csprojResolveAssemblyReference.cache
