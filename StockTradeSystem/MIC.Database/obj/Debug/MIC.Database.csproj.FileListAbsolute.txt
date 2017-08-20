@@ -51,3 +51,6 @@ C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\obj\Deb
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\CsvHelper.dll
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\CsvHelper.xml
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\obj\Debug\MIC.Database.Migrations.AddTables.resources
+C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\CsvHelper.dll
+C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\CsvHelper.xml
+C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\obj\Debug\MIC.Database.Migrations.AddTables.resources
