@@ -1,3 +1,10 @@
 Add-Migration AddVersionTable -ProjectName MIC.Database -Verbose -Force -ConnectionProviderName "System.Data.SqlClient" -ConnectionString "Data Source=PCD16007\SQLEXPRESS;Initial Catalog=StockTrade;Trusted_Connection=Yes"
 
+Add-Migration AddTables -ProjectName MIC.Database -Verbose -Force -ConnectionProviderName "System.Data.SqlClient" -ConnectionString "Data Source=.\SQL2012;Initial Catalog=StockTrade;Trusted_Connection=Yes"
+
+
 Update-Database -ProjectName MIC.Database -Verbose -Force -ConnectionProviderName "System.Data.SqlClient" -ConnectionString "Data Source=PCD16007\SQLEXPRESS;Initial Catalog=StockTrade;Trusted_Connection=Yes"
+
+
+Update-Database -ProjectName MIC.Database -Verbose -Force -ConnectionProviderName "System.Data.SqlClient" -ConnectionString "Data Source=.\SQL2012;Initial Catalog=StockTrade;Trusted_Connection=Yes"
+

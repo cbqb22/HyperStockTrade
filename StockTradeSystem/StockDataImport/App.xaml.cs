@@ -9,6 +9,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using MIC.Database;
+using MIC.Common;
 
 namespace StockDataImport
 {
@@ -27,6 +29,8 @@ namespace StockDataImport
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             StockDataImportStartup.RegisterServices();
+            DatabaseStartup.RegisterServices();
+            CommonStartup.RegisterServices();
         }
 
     }

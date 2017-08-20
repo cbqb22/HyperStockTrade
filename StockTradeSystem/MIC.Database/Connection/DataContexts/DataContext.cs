@@ -11,11 +11,20 @@ namespace MIC.Database.Connection.DataContexts
     /// </summary>
     public class DataContext : DataContextBase
     {
-        // バージョンテーブル
         /// <summary>
-        ///
+        /// バージョンテーブル
         /// </summary>
         public DbSet<_Version> _Version { get; set; }
+
+        /// <summary>
+        /// 日足データ
+        /// </summary>
+        public DbSet<DailyPrice> DailyPrice { get; set; }
+
+        /// <summary>
+        /// 株式銘柄
+        /// </summary>
+        public DbSet<StockCompany> StockCompany { get; set; }
 
         /// <summary>
         ///

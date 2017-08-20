@@ -17,31 +17,40 @@ namespace MIC.Database.Models
         /// <summary>
         /// ID
         /// </summary>
-        public int DailyDataId { get; set; }
+        public int DailyPriceId { get; set; }
+
+        /// <summary>
+        /// 親テーブルのキー
+        /// </summary>
+        public int StockCompanyId { get; set; }
+
+
+        /// <summary>
+        /// 取引日付
+        /// </summary>
+        [Required]
+        public DateTime DealDate { get; set; }
+
 
         /// <summary>
         /// 始値
         /// </summary>
-        [Required]
-        public double OpeningPrice  { get; set; }
+        public double? OpeningPrice { get; set; }
 
         /// <summary>
         /// 高値
         /// </summary>
-        [Required]
-        public double HighPrice { get; set; }
+        public double? HighPrice { get; set; }
 
         /// <summary>
         /// 安値
         /// </summary>
-        [Required]
-        public double LowPrice { get; set; }
+        public double? LowPrice { get; set; }
 
         /// <summary>
         /// 終値
         /// </summary>
-        [Required]
-        public double ClosingPrice { get; set; }
+        public double? ClosingPrice { get; set; }
 
 
         /// <summary>

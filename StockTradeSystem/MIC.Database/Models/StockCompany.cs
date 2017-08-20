@@ -27,15 +27,16 @@ namespace MIC.Database.Models
         /// 銘柄コード
         /// </summary>
         [Required,
-         Index(IndexName, IsUnique = true, Order = 1)]
+         Index(IndexName, IsUnique = true, Order = 0),
+         MaxLength(ColumnMaxLength.StockCodeLength)]
         public string StockCode { get; set; }
 
         /// <summary>
         /// 市場コード
         /// </summary>
         [Required,
-         Index(IndexName, IsUnique = true, Order = 2)]
-        public MarketCodes MarketCode { get; set; }
+         Index(IndexName, IsUnique = true, Order = 1)]
+        public MarketCode MarketCode { get; set; }
 
         /// <summary>
         /// 銘柄名称

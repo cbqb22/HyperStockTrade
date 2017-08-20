@@ -29,5 +29,7 @@
         /// <summary>VersionLengthの長さ</summary>
         public const int VersionLength = 30;
 
+        /// <summary>StockCodeLengthの長さ</summary>
+        public const int StockCodeLength = 10;
     }
 }

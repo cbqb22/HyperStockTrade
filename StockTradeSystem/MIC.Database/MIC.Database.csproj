@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.2.16.3.0\lib\net45\CsvHelper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -70,15 +74,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commons\ColumnMaxLength.cs" />
-    <Compile Include="Commons\Enums\MarketCodes.cs" />
+    <Compile Include="Commons\Enums\MarketCode.cs" />
     <Compile Include="Connection\DataContexts\DataContext.cs" />
     <Compile Include="Connection\DataContexts\DataContextBase.cs" />
     <Compile Include="Connection\DataContexts\DbEntityExtension.cs" />
     <Compile Include="Connection\Services\ConnectFilePlainTextPathService.cs" />
+    <Compile Include="Connection\Services\DataContextFactory.cs" />
     <Compile Include="Connection\Services\Interfaces\IConnectFilePathService.cs" />
+    <Compile Include="Connection\Services\Interfaces\IDataContextFactory.cs" />
+    <Compile Include="Connection\Services\Interfaces\IFactory.cs" />
     <Compile Include="Migrations\201708152334524_AddVersionTable.cs" />
     <Compile Include="Migrations\201708152334524_AddVersionTable.Designer.cs">
       <DependentUpon>201708152334524_AddVersionTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708200456527_AddTables.cs" />
+    <Compile Include="Migrations\201708200456527_AddTables.Designer.cs">
+      <DependentUpon>201708200456527_AddTables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Constants\ColumnTypeName.cs" />
@@ -86,6 +97,7 @@
     <Compile Include="Models\StockCompany.cs" />
     <Compile Include="Models\DailyPrice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DatabaseStartup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -94,6 +106,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201708152334524_AddVersionTable.resx">
       <DependentUpon>201708152334524_AddVersionTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708200456527_AddTables.resx">
+      <DependentUpon>201708200456527_AddTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

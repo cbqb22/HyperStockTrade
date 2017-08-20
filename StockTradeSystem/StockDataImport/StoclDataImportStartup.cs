@@ -13,7 +13,8 @@ namespace StockDataImport
     {
         internal static void RegisterServices()
         {
-            SimpleIoc.Default.Register<IStockDataDownloader, DailyDataDownloader>();
+            SimpleIoc.Default.Register<IStockDataDownloadService, DailyDataDownloadService>();
+            SimpleIoc.Default.Register<IStockDataImportService, DailyDataImportService>();
         }
     }
 }

@@ -1,6 +1,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using StockDataImport.Services.Interfaces;
+using System;
 using System.Windows.Input;
 
 namespace StockDataImport.ViewModel
@@ -22,7 +23,8 @@ namespace StockDataImport.ViewModel
 
         #region Services
 
-        private readonly IStockDataDownloader _stockDataDownloader;
+        private readonly IStockDataDownloadService _downloadService;
+        private readonly IStockDataImportService _importService;
 
         #endregion
 
@@ -36,16 +38,27 @@ namespace StockDataImport.ViewModel
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainViewModel(IStockDataDownloader stockDataDownloader)
+        public MainViewModel(IStockDataDownloadService downloadService,
+                             IStockDataImportService importService)
         {
-            _stockDataDownloader = stockDataDownloader;
+            _downloadService = downloadService;
+            _importService = importService;
 
             DownloadCommand = new RelayCommand(Download);
         }
 
-        private void Download()
+        private async void Download()
         {
-            _stockDataDownloader.DownloadAsync();
+            var current = new DateTime(2017, 01, 01);
+            var end = new DateTime(2017, 08, 20); ;
+
+            while (current <= end)
+            {
+                await _downloadService.DownloadAsync(current);
+                await _importService.ImportAsync(_downloadService.OutputPath);
+
+                current = current.AddDays(1);
+            }
         }
     }
 }
