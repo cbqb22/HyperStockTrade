@@ -1,34 +1,53 @@
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using StockAnalyzer.Services.Interfaces;
+using System.Windows.Input;
+using System;
+using System.Collections.ObjectModel;
+using StockAnalyzer.Models;
+using System.Collections.Generic;
 
 namespace StockAnalyzer.ViewModels
 {
-    /// <summary>
-    /// This class contains properties that the main View can data bind to.
-    /// <para>
-    /// Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.
-    /// </para>
-    /// <para>
-    /// You can also use Blend to data bind with the tool's support.
-    /// </para>
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
-    /// </summary>
     public class MainViewModel : ViewModelBase
     {
+        #region Services
+
+        private readonly IStockAnalyzeService _analyzeService;
+
+        #endregion
+
+        #region Commands
+
+        public ICommand AnalyzeCommand { get; set; }
+
+        #endregion
+
+        #region Properties
+
+        private IEnumerable<PickedStockData> _pickedStockDataList;
+        public IEnumerable<PickedStockData> PickedStockDataList { get { return _pickedStockDataList; } set { Set(ref _pickedStockDataList, value); } }
+
+
+
+        #endregion
+
         /// <summary>
-        /// Initializes a new instance of the MainViewModel class.
+        /// 
         /// </summary>
-        public MainViewModel()
+        public MainViewModel(IStockAnalyzeService analyzeService)
         {
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
+            _analyzeService = analyzeService;
+            AnalyzeCommand = new RelayCommand(Analyze);
+
+            PickedStockDataList = new List<PickedStockData>();
+        }
+
+        private void Analyze()
+        {
+            var start = new DateTime(2017, 6, 01);
+            var end = new DateTime(2017, 8, 19);
+            PickedStockDataList = _analyzeService.Analyze(start, end);
         }
     }
 }

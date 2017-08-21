@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Threading;
 using Microsoft.Practices.ServiceLocation;
+using MIC.Database;
 
 namespace StockAnalyzer
 {
@@ -18,8 +19,8 @@ namespace StockAnalyzer
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-
             StoclAnalyzerStartup.RegisterServices();
+            DatabaseStartup.RegisterServices();
         }
     }
 }
