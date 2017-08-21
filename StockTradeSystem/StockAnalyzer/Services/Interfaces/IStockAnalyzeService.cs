@@ -9,6 +9,6 @@ namespace StockAnalyzer.Services.Interfaces
 {
     public interface IStockAnalyzeService
     {
-        PickedStockData Analyze(DateTime start, DateTime end);
+        IEnumerable<PickedStockData> Analyze(DateTime start, DateTime end);
     }
 }

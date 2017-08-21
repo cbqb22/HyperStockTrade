@@ -39,9 +39,21 @@ namespace StockAnalyzer.Models
         private string _companyName;
 
         /// <summary>
-        /// 現在価
+        /// 現在値
         /// </summary>
-        public double CurrentPrice { get { return _currentPrice; } set { Set(ref _currentPrice, value); } }
-        private double _currentPrice;
+        public double? CurrentPrice { get { return _currentPrice; } set { Set(ref _currentPrice, value); } }
+        private double? _currentPrice;
+
+        /// <summary>
+        /// 最高値
+        /// </summary>
+        public double? MaxPrice { get { return _maxPrice; } set { Set(ref _maxPrice, value); } }
+        private double? _maxPrice;
+
+        /// <summary>
+        /// 最安値
+        /// </summary>
+        public double? MinPrice { get { return _minPrice; } set { Set(ref _minPrice, value); } }
+        private double? _minPrice;
     }
 }

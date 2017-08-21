@@ -35,19 +35,34 @@ namespace StockAnalyzer.Services
 
         #region Public
 
-        public PickedStockData Analyze(DateTime start, DateTime end)
+        public IEnumerable<PickedStockData> Analyze(DateTime start, DateTime end)
         {
+            var limitLowPrice = 150;
             var magnification = 1.5;
-            var minTurnover = 100000; 
+            var minTurnover = 5000 * 10000;
             using (var context = _dataContextFactory.Create())
             {
                 var picked = context.StockCompany
+                                    .Select(x => new { x.StockCompanyId, x.StockCode, x.MarketCode, x.CompanyName, DailyPrices = x.DailyPrices.Where(d => start <= d.DealDate && d.DealDate <= end) })
                                     .Where(x => x.DailyPrices.Min(m => m.ClosingPrice) * magnification <= x.DailyPrices.Max(m => m.ClosingPrice) &&
                                                 minTurnover <= x.DailyPrices.Average(a => a.Turnover) &&
-                                                (x.MarketCode == MarketCode.TSE_Mothers || x.MarketCode == MarketCode.JQ_Standard));
-            }
+                                                (x.MarketCode == MarketCode.TSE_Mothers || x.MarketCode == MarketCode.JQ_Standard))
+                                    .ToList()
+                                    .Select(x => new PickedStockData
+                                    {
+                                        StockCompanyId = x.StockCompanyId,
+                                        StockCode = x.StockCode,
+                                        MarketCode = x.MarketCode,
+                                        CompanyName = x.CompanyName,
+                                        CurrentPrice = x.DailyPrices.Last().ClosingPrice,
+                                        MaxPrice = x.DailyPrices.Max(m => m.ClosingPrice),
+                                        MinPrice = x.DailyPrices.Min(m => m.ClosingPrice)
+                                    })
+                                    .Where(x => limitLowPrice <= x.CurrentPrice)
+                                    .ToList();
 
-            return new PickedStockData();
+                return picked;
+            }
         }
 
         #endregion
