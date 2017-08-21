@@ -33,7 +33,6 @@ C:\Users\m_mikami\Documents\HST\StockTradeSystem\StockAnalyzer\bin\Debug\MIC.Com
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\StockAnalyzer\bin\Debug\MIC.Database.dll
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\StockAnalyzer\bin\Debug\MIC.Common.pdb
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\StockAnalyzer\bin\Debug\MIC.Database.pdb
-C:\Users\m_mikami\Documents\HST\StockTradeSystem\StockAnalyzer\bin\Debug\MIC.Database.dll.config
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\StockAnalyzer\bin\Debug\EntityFramework.xml
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\StockAnalyzer\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\StockAnalyzer\bin\Debug\StockAnalyzer.exe.config

@@ -32,7 +32,6 @@ namespace StockAnalyzer.Services
 
         #endregion
 
-
         #region Public
 
         public IEnumerable<PickedStockData> Analyze(DateTime start, DateTime end)
@@ -54,11 +53,12 @@ namespace StockAnalyzer.Services
                                         StockCode = x.StockCode,
                                         MarketCode = x.MarketCode,
                                         CompanyName = x.CompanyName,
-                                        CurrentPrice = x.DailyPrices.Last().ClosingPrice,
+                                        CurrentPrice = x.DailyPrices.OrderByDescending(p => p.DealDate).First().ClosingPrice,
                                         MaxPrice = x.DailyPrices.Max(m => m.ClosingPrice),
                                         MinPrice = x.DailyPrices.Min(m => m.ClosingPrice)
                                     })
                                     .Where(x => limitLowPrice <= x.CurrentPrice)
+                                    .Where(x => x.CurrentPrice <= x.MaxPrice / magnification)
                                     .ToList();
 
                 return picked;
