@@ -43,7 +43,8 @@ namespace StockAnalyzer.Services
             {
                 var picked = context.StockCompany
                                     .Select(x => new { x.StockCompanyId, x.StockCode, x.MarketCode, x.CompanyName, DailyPrices = x.DailyPrices.Where(d => start <= d.DealDate && d.DealDate <= end) })
-                                    .Where(x => x.DailyPrices.Min(m => m.ClosingPrice) * magnification <= x.DailyPrices.Max(m => m.ClosingPrice) &&
+                                    .Where(x => x.DailyPrices.OrderByDescending(d => d.DealDate).FirstOrDefault().ClosingPrice * magnification <= x.DailyPrices.Max(m => m.ClosingPrice) &&
+                                    //.Where(x => x.DailyPrices.Min(m => m.ClosingPrice) * magnification <= x.DailyPrices.Max(m => m.ClosingPrice) &&
                                                 minTurnover <= x.DailyPrices.Average(a => a.Turnover) &&
                                                 (x.MarketCode == MarketCode.TSE_Mothers || x.MarketCode == MarketCode.JQ_Standard))
                                     .ToList()
