@@ -78,3 +78,6 @@ C:\Users\m_mikami\Documents\HST\StockTradeSystem\StockDataImport\bin\Debug\MIC.D
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\StockDataImport\bin\Debug\CsvHelper.xml
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\StockDataImport\obj\Debug\Views\Test.g.cs
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\StockDataImport\obj\Debug\Views\Test.baml
+C:\Users\m_mikami\Documents\HST\StockTradeSystem\StockDataImport\bin\Debug\EntityFramework.xml
+C:\Users\m_mikami\Documents\HST\StockTradeSystem\StockDataImport\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\m_mikami\Documents\HST\StockTradeSystem\StockDataImport\bin\Debug\ja\EntityFramework.resources.dll

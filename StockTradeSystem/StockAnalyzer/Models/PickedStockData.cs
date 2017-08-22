@@ -55,5 +55,17 @@ namespace StockAnalyzer.Models
         /// </summary>
         public double? MinPrice { get { return _minPrice; } set { Set(ref _minPrice, value); } }
         private double? _minPrice;
+
+        /// <summary>
+        /// 最高出来高
+        /// </summary>
+        public double MaxVolume { get { return _maxVolume; } set { Set(ref _maxVolume, value); } }
+        private double _maxVolume;
+
+        /// <summary>
+        /// 平均出来高
+        /// </summary>
+        public double AverageVolume { get { return _averageVolume; } set { Set(ref _averageVolume, value); } }
+        private double _averageVolume;
     }
 }
