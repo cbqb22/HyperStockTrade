@@ -13,8 +13,8 @@ namespace MIC.Database.Connection.Services
     {
         #region 
 
-        //private const string DefaultConnectionString = @"Data Source=.\SQL2012;Initial Catalog=StockTrade;Trusted_Connection=Yes";
-        private const string DefaultConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=StockTrade;Trusted_Connection=Yes";
+        private const string DefaultConnectionString = @"Data Source=.\SQL2012;Initial Catalog=StockTrade;Trusted_Connection=Yes";
+        //private const string DefaultConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=StockTrade;Trusted_Connection=Yes";
 
         #endregion
 

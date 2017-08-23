@@ -44,8 +44,8 @@ namespace StockDataImport.Services
                                  var fileName = Path.GetFileNameWithoutExtension(FilePath);
                                  var dealDate = new DateTime(int.Parse(fileName.Substring(0, 4)), int.Parse(fileName.Substring(4, 2)), int.Parse(fileName.Substring(6, 2)));
 
-                                 //var config = new CsvConfiguration() { Encoding = Encoding.GetEncoding(932), HasHeaderRecord = true };
-                                 //config.RegisterClassMap<DailyDataMap>();
+                                 var config = new CsvConfiguration() { Encoding = Encoding.GetEncoding(932), HasHeaderRecord = true };
+                                 config.RegisterClassMap<DailyDataMap>();
 
                                  //using (var csv = new CsvReader(File.OpenText(FilePath), config))
                                  using (var sr = new StreamReader(FilePath, Encoding.GetEncoding(932)))

@@ -3,9 +3,10 @@ using GalaSoft.MvvmLight.Command;
 using StockAnalyzer.Services.Interfaces;
 using System.Windows.Input;
 using System;
-using System.Collections.ObjectModel;
 using StockAnalyzer.Models;
 using System.Collections.Generic;
+using System.Linq;
+using System.IO;
 
 namespace StockAnalyzer.ViewModels
 {
@@ -14,12 +15,16 @@ namespace StockAnalyzer.ViewModels
         #region Services
 
         private readonly IStockAnalyzeService _analyzeService;
+        private readonly ICsvService _csvService;
+
+
 
         #endregion
 
         #region Commands
 
         public ICommand AnalyzeCommand { get; set; }
+        public ICommand CsvCommand { get; set; }
 
         #endregion
 
@@ -35,12 +40,23 @@ namespace StockAnalyzer.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        public MainViewModel(IStockAnalyzeService analyzeService)
+        public MainViewModel(IStockAnalyzeService analyzeService,
+                             ICsvService csvService)
         {
             _analyzeService = analyzeService;
+            _csvService = csvService;
+
             AnalyzeCommand = new RelayCommand(Analyze);
+            CsvCommand = new RelayCommand(WriteToCsv);
 
             PickedStockDataList = new List<PickedStockData>();
+        }
+
+        private void WriteToCsv()
+        {
+            var path = Path.Combine(@"C:\Users\poohace\Desktop\SBIマクロ\自動表示マクロ", DateTime.Now.ToString("yyyyMMddHHmmss") + ".csv");
+            if (PickedStockDataList != null && PickedStockDataList.Any())
+                _csvService.Write(path, PickedStockDataList);
         }
 
         private void Analyze()

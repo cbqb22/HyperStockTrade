@@ -14,7 +14,10 @@
             <RowDefinition Height="20" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Button Content="解析"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Height="50" Command="{Binding AnalyzeCommand}" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="解析"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Height="50" Command="{Binding AnalyzeCommand}" />
+            <Button Content="CSV"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Height="50" Command="{Binding CsvCommand}" />
+        </StackPanel>
         <TextBlock Grid.Row="1" Text="{Binding PickedStockDataList.Count,Mode=OneWay}" />
         <DataGrid
             Grid.Row="2"

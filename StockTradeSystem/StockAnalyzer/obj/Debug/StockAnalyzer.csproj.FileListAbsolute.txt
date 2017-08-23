@@ -73,3 +73,5 @@ C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\StockAnalyzer\obj\De
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\StockAnalyzer\obj\Debug\StockAnalyzer.Properties.Resources.resources
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\StockAnalyzer\obj\Debug\StockAnalyzer.csproj.GenerateResource.Cache
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\StockAnalyzer\bin\Debug\MIC.Database.dll.config
+C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\StockAnalyzer\bin\Debug\CsvHelper.dll
+C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\StockAnalyzer\bin\Debug\CsvHelper.xml

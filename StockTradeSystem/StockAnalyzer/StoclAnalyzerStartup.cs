@@ -9,6 +9,7 @@ namespace StockAnalyzer
         public static void RegisterServices()
         {
             SimpleIoc.Default.Register<IStockAnalyzeService, StockAnalyzeService>();
+            SimpleIoc.Default.Register<ICsvService, CsvService>();
         }
     }
 }
