@@ -4,7 +4,7 @@ using StockAnalyzer.Services.Interfaces;
 
 namespace StockAnalyzer
 {
-    public static class StoclAnalyzerStartup
+    public static class StockAnalyzerStartup
     {
         public static void RegisterServices()
         {

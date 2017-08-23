@@ -75,3 +75,5 @@ C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\StockAnalyzer\obj\De
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\StockAnalyzer\bin\Debug\MIC.Database.dll.config
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\StockAnalyzer\bin\Debug\CsvHelper.dll
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\StockAnalyzer\bin\Debug\CsvHelper.xml
+C:\Users\m_mikami\Documents\HST\StockTradeSystem\StockAnalyzer\bin\Debug\CsvHelper.dll
+C:\Users\m_mikami\Documents\HST\StockTradeSystem\StockAnalyzer\bin\Debug\CsvHelper.xml

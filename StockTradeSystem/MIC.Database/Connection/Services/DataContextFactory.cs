@@ -1,26 +1,48 @@
-﻿using MIC.Database.Connection.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Common;
+using MIC.Database.Connection.Services.Interfaces;
 using MIC.Database.Connection.DataContexts;
-using System.Data.Common;
+using MIC.Database.Connection.Models;
+using MIC.Common.ExtensionMethods;
+using System.IO;
 
 namespace MIC.Database.Connection.Services
 {
     public class DataContextFactory : IDataContextFactory<DataContext>
     {
+        #region Services
+
+        private readonly IConnectFilePathService _connectFilePathService;
+
+        #endregion
+
+
+
+        #region Constructor
+
+        public DataContextFactory(IConnectFilePathService connectFilePathService)
+        {
+            _connectFilePathService = connectFilePathService;
+        }
+
+        #endregion
+
         #region 
 
-        private const string DefaultConnectionString = @"Data Source=.\SQL2012;Initial Catalog=StockTrade;Trusted_Connection=Yes";
-        //private const string DefaultConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=StockTrade;Trusted_Connection=Yes";
+        //private const string DefaultConnectionString = @"Data Source=.\SQL2012;Initial Catalog=StockTrade;Trusted_Connection=Yes";
+        private const string DefaultConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=StockTrade;Trusted_Connection=Yes";
 
         #endregion
 
         public DataContext Create()
         {
-            return new DataContext(DefaultConnectionString);
+            var connectionString = DefaultConnectionString;
+            var text = File.ReadAllText(_connectFilePathService.GetConnectFilePath());
+
+            var dbSettings = text.ParseXml<DatabaseSetting>();
+            if (dbSettings != null)
+                connectionString = dbSettings.ToConnectionString();
+
+            return new DataContext(connectionString);
         }
 
         public DataContext Create(string connectionString)

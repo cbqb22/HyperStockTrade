@@ -19,7 +19,7 @@ namespace StockAnalyzer
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            StoclAnalyzerStartup.RegisterServices();
+            StockAnalyzerStartup.RegisterServices();
             DatabaseStartup.RegisterServices();
         }
     }

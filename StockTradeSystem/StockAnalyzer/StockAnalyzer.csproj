@@ -87,7 +87,7 @@
     <Compile Include="Services\Interfaces\IStockAnalyzeService.cs" />
     <Compile Include="Services\CsvService.cs" />
     <Compile Include="Services\StockAnalyzeService.cs" />
-    <Compile Include="StoclAnalyzerStartup.cs" />
+    <Compile Include="StockAnalyzerStartup.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">

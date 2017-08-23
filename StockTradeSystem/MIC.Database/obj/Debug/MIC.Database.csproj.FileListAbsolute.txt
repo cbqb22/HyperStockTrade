@@ -22,7 +22,6 @@ C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\GalaSoft
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\GalaSoft.MvvmLight.Platform.xml
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\Microsoft.Practices.ServiceLocation.xml
-C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\obj\Debug\MIC.Database.csprojResolveAssemblyReference.cache
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\MIC.Database.dll.config
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\MIC.Database.dll
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\MIC.Database.pdb
@@ -54,3 +53,6 @@ C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\obj\Deb
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\CsvHelper.dll
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\CsvHelper.xml
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\obj\Debug\MIC.Database.Migrations.AddTables.resources
+C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\MIC.Common.dll
+C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\MIC.Common.pdb
+C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\obj\Debug\MIC.Database.csprojResolveAssemblyReference.cache

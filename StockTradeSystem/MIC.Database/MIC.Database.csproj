@@ -78,6 +78,8 @@
     <Compile Include="Connection\DataContexts\DataContext.cs" />
     <Compile Include="Connection\DataContexts\DataContextBase.cs" />
     <Compile Include="Connection\DataContexts\DbEntityExtension.cs" />
+    <Compile Include="Connection\Models\DatabaseSetting.cs" />
+    <Compile Include="Connection\Models\Interfaces\IDatabaseSetting.cs" />
     <Compile Include="Connection\Services\ConnectFilePlainTextPathService.cs" />
     <Compile Include="Connection\Services\DataContextFactory.cs" />
     <Compile Include="Connection\Services\Interfaces\IConnectFilePathService.cs" />
@@ -110,6 +112,12 @@
     <EmbeddedResource Include="Migrations\201708200456527_AddTables.resx">
       <DependentUpon>201708200456527_AddTables.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MIC.Common\MIC.Common.csproj">
+      <Project>{a92b24c4-c04d-49dc-8661-019d7ed62be5}</Project>
+      <Name>MIC.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
