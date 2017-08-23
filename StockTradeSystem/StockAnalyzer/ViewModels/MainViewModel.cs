@@ -12,6 +12,12 @@ namespace StockAnalyzer.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+        #region Fields
+
+        private const string BaseUrlFormat = "https://stocks.finance.yahoo.co.jp/stocks/chart/?code={0}.T&ct=z&t=5y&q=c&l=off&z=m&p=m65,m130,s&a=v";
+
+        #endregion
+
         #region Services
 
         private readonly IStockAnalyzeService _analyzeService;
@@ -25,13 +31,20 @@ namespace StockAnalyzer.ViewModels
 
         public ICommand AnalyzeCommand { get; set; }
         public ICommand CsvCommand { get; set; }
-
+        public ICommand ItemSelectionChangedCommand { get; set; }
+        
         #endregion
 
         #region Properties
 
         private IEnumerable<PickedStockData> _pickedStockDataList;
         public IEnumerable<PickedStockData> PickedStockDataList { get { return _pickedStockDataList; } set { Set(ref _pickedStockDataList, value); } }
+
+        public string Url { get { return _url; } set { Set(ref _url, value); } }
+        private string _url;
+
+        private PickedStockData _selectedItem;
+        public PickedStockData SelectedItem { get { return _selectedItem; } set { Set(ref _selectedItem, value); } }
 
 
 
@@ -48,8 +61,16 @@ namespace StockAnalyzer.ViewModels
 
             AnalyzeCommand = new RelayCommand(Analyze);
             CsvCommand = new RelayCommand(WriteToCsv);
+            ItemSelectionChangedCommand = new RelayCommand(ItemSelectionChanged);
 
             PickedStockDataList = new List<PickedStockData>();
+        }
+
+        private void ItemSelectionChanged()
+        {
+            if (SelectedItem == null)
+                return;
+            Url = string.Format(BaseUrlFormat, SelectedItem.StockCode);
         }
 
         private void WriteToCsv()
