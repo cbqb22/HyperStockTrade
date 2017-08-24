@@ -67,5 +67,13 @@ namespace StockAnalyzer.Models
         /// </summary>
         public double AverageVolume { get { return _averageVolume; } set { Set(ref _averageVolume, value); } }
         private double _averageVolume;
+
+
+        /// <summary>
+        /// SSV出力フラグ
+        /// </summary>
+        public bool IsCsvOutput { get { return _isCsvOutput; } set { Set(ref _isCsvOutput, value); } }
+        private bool _isCsvOutput;
+
     }
 }

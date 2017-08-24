@@ -56,3 +56,5 @@ C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\obj\Debug\MIC.Data
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\MIC.Common.dll
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\MIC.Common.pdb
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\obj\Debug\MIC.Database.csprojResolveAssemblyReference.cache
+C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\MIC.Common.dll
+C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\MIC.Common.pdb

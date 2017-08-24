@@ -20,6 +20,7 @@ namespace StockAnalyzer.Models.Csv
             Map(m => m.MinPrice).Index(5);
             Map(m => m.MaxVolume).Index(6);
             Map(m => m.AverageVolume).Index(7);
+            Map(m => m.IsCsvOutput).Index(8);
         }
     }
 }
