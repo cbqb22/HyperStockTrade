@@ -28,19 +28,25 @@ namespace MIC.Database.Connection.Services
 
         #region 
 
-        //private const string DefaultConnectionString = @"Data Source=.\SQL2012;Initial Catalog=StockTrade;Trusted_Connection=Yes";
-        private const string DefaultConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=StockTrade;Trusted_Connection=Yes";
+        private const string DefaultConnectionString = @"Data Source=.\SQL2012;Initial Catalog=StockTrade;Trusted_Connection=Yes";
+        //private const string DefaultConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=StockTrade;Trusted_Connection=Yes";
 
         #endregion
 
         public DataContext Create()
         {
             var connectionString = DefaultConnectionString;
-            var text = File.ReadAllText(_connectFilePathService.GetConnectFilePath());
+            var filePath = _connectFilePathService.GetConnectFilePath();
 
-            var dbSettings = text.ParseXml<DatabaseSetting>();
-            if (dbSettings != null)
-                connectionString = dbSettings.ToConnectionString();
+            if (File.Exists(filePath))
+            {
+                var text = File.ReadAllText(filePath);
+                var dbSettings = text.ParseXml<DatabaseSetting>();
+                if (dbSettings != null)
+                    connectionString = dbSettings.ToConnectionString();
+            }
+
+
 
             return new DataContext(connectionString);
         }
