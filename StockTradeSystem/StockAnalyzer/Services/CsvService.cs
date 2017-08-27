@@ -40,7 +40,9 @@ namespace StockAnalyzer.Services
             var config = new CsvConfiguration() { Encoding = Encoding.UTF8, HasHeaderRecord = true };
             config.RegisterClassMap<PickedStockDataMap>();
 
-            using (var csv = new CsvWriter(File.CreateText(path), config))
+            using (var sw = new StreamWriter(path, false, Encoding.GetEncoding(932)))
+            using (var csv = new CsvWriter(sw, config))
+            //using (var csv = new CsvWriter(File.CreateText(path), config))
             {
                 csv.WriteRecords(records);
             }

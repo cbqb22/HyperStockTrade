@@ -75,9 +75,13 @@ namespace StockAnalyzer.ViewModels
 
         private void WriteToCsv()
         {
-            var path = Path.Combine(@"C:\Users\poohace\Desktop\SBIマクロ\自動表示マクロ", DateTime.Now.ToString("yyyyMMddHHmmss") + ".csv");
+            var folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),  "SBIマクロ");
+            if (!Directory.Exists(folderPath))
+                Directory.CreateDirectory(folderPath);
+
+            var filePath = Path.Combine(folderPath, DateTime.Now.ToString("yyyyMMddHHmmss") + ".csv");
             if (PickedStockDataList != null && PickedStockDataList.Any())
-                _csvService.Write(path, PickedStockDataList);
+                _csvService.Write(filePath, PickedStockDataList);
         }
 
         private void Analyze()
