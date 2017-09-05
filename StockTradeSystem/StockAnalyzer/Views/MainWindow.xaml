@@ -21,7 +21,25 @@
             <Button Content="解析"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Height="50" Command="{Binding AnalyzeCommand}" />
             <Button Content="CSV"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Height="50" Command="{Binding CsvCommand}" />
         </StackPanel>
-        <TextBlock Grid.Row="1" Text="{Binding PickedStockDataList.Count,Mode=OneWay}" />
+        <Grid Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock  Width="100" Background="LightBlue" Text="{Binding PickedStockDataList.Count,Mode=OneWay}" />
+                <ComboBox 
+                    ItemsSource="{Binding SpanItems}"
+                    DisplayMemberPath="Name"
+                    SelectedValuePath="Id"
+                    SelectedItem="{Binding SelectedSpan}"
+                    SelectedIndex="5"
+                    Width="100">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <command:EventToCommand Command="{Binding ItemSelectionChangedCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+            </StackPanel>
+        </Grid>
+            
         <DataGrid
             Grid.Row="2"
             SelectedItem="{Binding SelectedItem}"
