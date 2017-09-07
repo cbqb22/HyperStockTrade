@@ -102,8 +102,8 @@ namespace StockAnalyzer.ViewModels
 
         private void Analyze()
         {
-            var start = new DateTime(2017, 01, 01);
-            var end = new DateTime(2017, 8, 19);
+            var end = DateTime.Now;
+            var start = end.AddYears(-1);
             PickedStockDataList = _analyzeService.Analyze(start, end);
         }
     }
