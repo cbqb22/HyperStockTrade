@@ -81,7 +81,13 @@ namespace MIC.Database.Commons.Enums
         /// <summary>
         /// 福証Q-Board
         /// </summary>
-        FSE_QBoard = 15
+        FSE_QBoard = 15,
+
+        /// <summary>
+        /// 東証マザーズ外国
+        /// </summary>
+        TSE_Mothers_Foreign = 16,
+
     }
 
 
@@ -106,6 +112,7 @@ namespace MIC.Database.Commons.Enums
                 case MarketCode.TSE2_Foreign:
                 case MarketCode.TSE_TPM:
                 case MarketCode.TSE_Mothers:
+                case MarketCode.TSE_Mothers_Foreign:
                     return "T";
 
                 case MarketCode.JQ:
@@ -150,6 +157,10 @@ namespace MIC.Database.Commons.Enums
                     return "東証TPM";
                 case MarketCode.TSE_Mothers:
                     return "東証マザーズ";
+                case MarketCode.TSE_Mothers_Foreign:
+                    return "東証マザーズ外国";
+
+                    
 
                 //JQ
                 case MarketCode.JQ:
@@ -200,6 +211,8 @@ namespace MIC.Database.Commons.Enums
                 return MarketCode.TSE_TPM;
             else if (marketName == MarketCode.TSE_Mothers.GetMarketName())
                 return MarketCode.TSE_Mothers;
+            else if (marketName == MarketCode.TSE_Mothers_Foreign.GetMarketName())
+                return MarketCode.TSE_Mothers_Foreign;
 
             else if (marketName == MarketCode.JQ.GetMarketName())
                 return MarketCode.JQ;

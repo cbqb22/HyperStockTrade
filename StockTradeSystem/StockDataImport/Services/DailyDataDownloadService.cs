@@ -62,7 +62,7 @@ namespace StockDataImport.Services
 
             try
             {
-                await Task.Delay(5000);
+                await Task.Delay(500);
 
                 var wc = new WebClient();
                 await wc.DownloadFileTaskAsync(Uri.AbsoluteUri, OutputPath);

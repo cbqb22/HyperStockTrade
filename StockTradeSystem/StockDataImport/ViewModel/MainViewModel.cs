@@ -40,7 +40,7 @@ namespace StockDataImport.ViewModel
 
         private async void Download()
         {
-            var current = new DateTime(2017, 08, 01);
+            var current = new DateTime(2017, 11, 09);
             var end = DateTime.Now;
 
             while (current <= end)
