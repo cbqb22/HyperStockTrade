@@ -13,8 +13,11 @@ namespace StockDataImport
     {
         internal static void RegisterServices()
         {
-            SimpleIoc.Default.Register<IStockDataDownloadService, DailyDataDownloadService>();
-            SimpleIoc.Default.Register<IStockDataImportService, DailyDataImportService>();
+            // KB-Com 株価データサイトは2017/12/31でサービス終了 
+            //SimpleIoc.Default.Register<IStockDataDownloadService, DailyDataDownloadService>();
+            //SimpleIoc.Default.Register<IStockDataImportService, DailyDataImportService>();
+            SimpleIoc.Default.Register<IStockDataDownloadService, MuzinzouDataDownloadService>();
+            SimpleIoc.Default.Register<IStockDataImportService, MuzinzouDailyDataImportService>();
         }
     }
 }

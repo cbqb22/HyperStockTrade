@@ -6,6 +6,7 @@ using StockDataImport.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace StockDataImport.Services
 {
-    public class DailyDataDownloadService : IStockDataDownloadService
+    public class MuzinzouDataDownloadService : IStockDataDownloadService
     {
         #region Services
 
@@ -24,9 +25,10 @@ namespace StockDataImport.Services
 
         #region Fields
 
-        private const string UrlFormat = "http://k-db.com/stocks/{0}-{1}-{2}?download=csv";
-        private readonly string Output = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Stock");
-
+        private const string UrlFormat = "http://souba-data.com/k_data/{0}/{1}_{2}/T{3}.zip";  //http://souba-data.com/k_data/2017/17_01/T170104.zip
+        private const string FileNameFormat = "T{0}";
+        private string OutputZip = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"Stock\Muzinzou", "Zip");
+        private string Output = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"Stock\Muzinzou");
         #endregion
 
         #region Properties
@@ -38,14 +40,14 @@ namespace StockDataImport.Services
 
         #region Constractor
 
-        public DailyDataDownloadService(IHolidayCheckService holidayCheckService,
-                                        IDataContextFactory<DataContext> factory)
+        public MuzinzouDataDownloadService(IHolidayCheckService holidayCheckService,
+                                           IDataContextFactory<DataContext> factory)
         {
             _dataContextFactory = factory;
             _holidayCheckService = holidayCheckService;
 
-            if (!Directory.Exists(Output))
-                Directory.CreateDirectory(Output);
+            if (!Directory.Exists(OutputZip))
+                Directory.CreateDirectory(OutputZip);
         }
 
         #endregion
@@ -59,21 +61,25 @@ namespace StockDataImport.Services
             if (IsImported(date))
                 return;
 
-            OutputPath = Path.Combine(Output, date.ToString("yyyyMMdd") + ".csv");
-            Uri = new Uri(string.Format(UrlFormat, date.Year.ToString().PadLeft(2, '0'), date.Month.ToString().PadLeft(2, '0'), date.Day.ToString().PadLeft(2, '0')));
+            OutputPath = Path.Combine(Output, string.Format(FileNameFormat , date.ToString("yyMMdd")) + ".csv"); // T170104.csv
+            Uri = new Uri(string.Format(UrlFormat, date.ToString("yyyy"), date.ToString("yy"), date.ToString("MM"), date.ToString("yyMMdd")));
 
             if (!RemoteFileExists(Uri.AbsoluteUri))
                 return;
 
             try
             {
-                await Task.Delay(500);
+                var outputZip = Path.Combine(OutputZip, string.Format(FileNameFormat , date.ToString("yyMMdd")) + ".zip");
 
                 var wc = new WebClient();
-                await wc.DownloadFileTaskAsync(Uri.AbsoluteUri, OutputPath);
+                await wc.DownloadFileTaskAsync(Uri.AbsoluteUri, outputZip);
 
                 if (File.Exists(OutputPath) && new FileInfo(OutputPath).Length == 0)
                     File.Delete(OutputPath);
+
+                // ZIP解凍処理
+                ZipFile.ExtractToDirectory(outputZip, Output);
+
             }
             catch (AggregateException ex)
             {
