@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="Commons\ColumnMaxLength.cs" />
     <Compile Include="Commons\Enums\MarketCode.cs" />
+    <Compile Include="Commons\Enums\Muzionzou\MuzionzouMarketCode.cs" />
     <Compile Include="Connection\DataContexts\DataContext.cs" />
     <Compile Include="Connection\DataContexts\DataContextBase.cs" />
     <Compile Include="Connection\DataContexts\DbEntityExtension.cs" />

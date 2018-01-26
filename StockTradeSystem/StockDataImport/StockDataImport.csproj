@@ -93,6 +93,7 @@
     <Compile Include="Services\Interfaces\IStockDataImportService.cs" />
     <Compile Include="Services\Interfaces\IStockDataDownloadService.cs" />
     <Compile Include="Services\MuzinzouDataDownloadService.cs" />
+    <Compile Include="Services\MuzinzouDailyDataImportService.cs" />
     <Compile Include="StoclDataImportStartup.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
