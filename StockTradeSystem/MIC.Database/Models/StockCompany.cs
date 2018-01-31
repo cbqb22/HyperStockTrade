@@ -27,7 +27,7 @@ namespace MIC.Database.Models
         /// 銘柄コード
         /// </summary>
         [Required,
-         Index(IndexName, IsUnique = true, Order = 0),
+         Index(IndexName, Order = 0),
          MaxLength(ColumnMaxLength.StockCodeLength)]
         public string StockCode { get; set; }
 
@@ -35,7 +35,7 @@ namespace MIC.Database.Models
         /// 市場コード
         /// </summary>
         [Required,
-         Index(IndexName, IsUnique = true, Order = 1)]
+         Index(IndexName, Order = 1)]
         public MarketCode MarketCode { get; set; }
 
         /// <summary>

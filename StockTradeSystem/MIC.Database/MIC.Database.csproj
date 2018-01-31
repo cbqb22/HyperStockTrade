@@ -94,6 +94,10 @@
     <Compile Include="Migrations\201708200456527_AddTables.Designer.cs">
       <DependentUpon>201708200456527_AddTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801302306470_RemoveUniqueKeyInStockCompany.cs" />
+    <Compile Include="Migrations\201801302306470_RemoveUniqueKeyInStockCompany.Designer.cs">
+      <DependentUpon>201801302306470_RemoveUniqueKeyInStockCompany.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Constants\ColumnTypeName.cs" />
     <Compile Include="Models\_Version.cs" />
@@ -112,6 +116,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708200456527_AddTables.resx">
       <DependentUpon>201708200456527_AddTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801302306470_RemoveUniqueKeyInStockCompany.resx">
+      <DependentUpon>201801302306470_RemoveUniqueKeyInStockCompany.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

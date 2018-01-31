@@ -88,6 +88,17 @@ namespace MIC.Database.Commons.Enums
         /// </summary>
         TSE_Mothers_Foreign = 16,
 
+        /// <summary>
+        /// 名古屋一部
+        /// </summary>
+        NSE1 = 17,
+
+        /// <summary>
+        /// 名古屋二部
+        /// </summary>
+        NSE2 = 18,
+
+
     }
 
 
@@ -128,6 +139,10 @@ namespace MIC.Database.Commons.Enums
                 case MarketCode.FSE:
                 case MarketCode.FSE_QBoard:
                     return "F";
+
+                case MarketCode.NSE1:
+                case MarketCode.NSE2:
+                    return "N";
             }
 
             throw new ArgumentException("無効なMarketCodeが指定されました。MarketCode:" + code);
@@ -160,7 +175,6 @@ namespace MIC.Database.Commons.Enums
                 case MarketCode.TSE_Mothers_Foreign:
                     return "東証マザーズ外国";
 
-                    
 
                 //JQ
                 case MarketCode.JQ:
@@ -183,6 +197,13 @@ namespace MIC.Database.Commons.Enums
                     return "福証";
                 case MarketCode.FSE_QBoard:
                     return "福証Q-Board";
+
+
+                //NSE
+                case MarketCode.NSE1:
+                    return "名古屋1部";
+                case MarketCode.NSE2:
+                    return "名古屋2部";
             }
 
             throw new ArgumentException("無効なMarketCodeが指定されました。MarketCode:" + code);
@@ -232,6 +253,11 @@ namespace MIC.Database.Commons.Enums
                 return MarketCode.FSE;
             else if (marketName == MarketCode.FSE_QBoard.GetMarketName())
                 return MarketCode.FSE_QBoard;
+
+            else if (marketName == MarketCode.NSE1.GetMarketName())
+                return MarketCode.NSE1;
+            else if (marketName == MarketCode.NSE2.GetMarketName())
+                return MarketCode.NSE2;
 
             throw new ArgumentException("無効なMarketNameが指定されました。MarketName:" + marketName);
         }

@@ -11,11 +11,22 @@ namespace StockDataImport.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
+        #region Properties
+
+        private DateTime _startDate = DateTime.Now.AddDays(-1);
+        public DateTime StartDate { get { return _startDate; } set { Set(ref _startDate, value); } }
+
+
+        private DateTime _endDate = DateTime.Now;
+        public DateTime EndDate { get { return _endDate; } set { Set(ref _endDate, value); } }
+
+        #endregion
 
         #region Services
 
         private readonly IStockDataDownloadService _downloadService;
         private readonly IStockDataImportService _importService;
+        private readonly IStockDataBackupService _backupService;
 
         #endregion
 
@@ -30,21 +41,24 @@ namespace StockDataImport.ViewModel
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         public MainViewModel(IStockDataDownloadService downloadService,
-                             IStockDataImportService importService)
+                             IStockDataImportService importService,
+                             IStockDataBackupService backupService)
         {
             _downloadService = downloadService;
             _importService = importService;
+            _backupService = backupService;
 
             DownloadCommand = new RelayCommand(Download);
         }
 
         private async void Download()
         {
-            var current = new DateTime(2017, 11, 13);
-            var end = DateTime.Now;
+            var current = _startDate;
+            var end = _endDate;
 
             while (current <= end)
             {
+                await _backupService.BackupAsync();
                 await _downloadService.DownloadAsync(current);
                 await _importService.ImportAsync(_downloadService.OutputPath);
 

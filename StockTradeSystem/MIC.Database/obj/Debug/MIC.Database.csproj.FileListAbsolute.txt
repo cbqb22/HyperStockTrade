@@ -58,3 +58,4 @@ C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\MIC.Comm
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\obj\Debug\MIC.Database.csprojResolveAssemblyReference.cache
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\MIC.Common.dll
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\MIC.Common.pdb
+C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\obj\Debug\MIC.Database.Migrations.RemoveUniqueKeyInStockCompany.resources

@@ -36,7 +36,7 @@ namespace MIC.Database.Commons.Enums
         /// <summary>
         /// 名古屋二部
         /// </summary>
-        NSE1 = 32,
+        NSE2 = 32,
 
         /// <summary>
         /// 福証（福証Q-Board含む）
@@ -75,40 +75,36 @@ namespace MIC.Database.Commons.Enums
     /// <summary>
     /// MarketCodeの拡張メソッドクラス
     /// </summary>
-    public static class MarketCodeExtension
+    public static class MuzionzouMarketCodeExtension
     {
         /// <summary>
         /// 短い市場コードを取得します
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        public static string GetMarketCode(this MuzionzouMarketCode code)
+        public static MarketCode GetMarketCode(this MuzionzouMarketCode code)
         {
             switch (code)
             {
-                //case MuzionzouMarketCode.TSE:
                 case MuzionzouMarketCode.TSE1:
+                    return MarketCode.TSE1;
                 case MuzionzouMarketCode.TSE_Foreign:
+                    return MarketCode.TSE1_Foreign; // １・２混合のがないので東証に
                 case MuzionzouMarketCode.TSE2:
-                //case MuzionzouMarketCode.TSE2_Foreign:
-                //case MuzionzouMarketCode.TSE_TPM:
+                    return MarketCode.TSE2; 
                 case MuzionzouMarketCode.TSE_Mothers:
-                //case MuzionzouMarketCode.TSE_Mothers_Foreign:
-                    return "T";
+                    return MarketCode.TSE_Mothers;
 
                 case MuzionzouMarketCode.JQ:
-                //case MuzionzouMarketCode.JQ_Growth:
-                //case MuzionzouMarketCode.JQ_Standard:
-                //case MuzionzouMarketCode.JQ_Standard_Foreign:
-                    return "T";
-
-                //case MuzionzouMarketCode.SSE:
-                //case MuzionzouMarketCode.SSE_Ambitious:
-                //    return "S";
+                    return MarketCode.JQ;
 
                 case MuzionzouMarketCode.FSE:
-                //case MuzionzouMarketCode.FSE_QBoard:
-                    return "F";
+                    return MarketCode.FSE;
+
+                case MuzionzouMarketCode.NSE1:
+                    return MarketCode.NSE1;
+                case MuzionzouMarketCode.NSE2:
+                    return MarketCode.NSE2;
             }
 
             throw new ArgumentException("無効なMuzionzouMarketCodeが指定されました。MarketCode:" + code);

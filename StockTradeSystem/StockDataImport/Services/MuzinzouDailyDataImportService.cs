@@ -42,7 +42,7 @@ namespace StockDataImport.Services
                              try
                              {
                                  var fileName = Path.GetFileNameWithoutExtension(FilePath);
-                                 var dealDate = new DateTime(int.Parse(fileName.Substring(0, 4)), int.Parse(fileName.Substring(4, 2)), int.Parse(fileName.Substring(6, 2)));
+                                 var dealDate = new DateTime(int.Parse("20" + fileName.Substring(1, 2)), int.Parse(fileName.Substring(3, 2)), int.Parse(fileName.Substring(5, 2)));
 
                                  var config = new CsvConfiguration() { Encoding = Encoding.GetEncoding(932), HasHeaderRecord = true };
                                  config.RegisterClassMap<DailyDataMap>();
@@ -58,19 +58,25 @@ namespace StockDataImport.Services
                                      while ((line = sr.ReadLine()) != null)
                                      {
                                          counter++;
-                                         if (counter == 1)
-                                             continue;
+                                         //if (counter == 1)
+                                         //    continue;
 
                                          var sepa = line.Split(',');
 
-                                         if (!string.IsNullOrWhiteSpace(sepa[0]) && sepa[0].Length != 6)
+                                         if (!string.IsNullOrWhiteSpace(sepa[1]) && sepa[1].Length != 4)
                                              continue;
+
+                                         int result;
+                                         if (!int.TryParse(sepa[2], out result))
+                                             continue;
+
+                                         var marketCode = ((MuzionzouMarketCode)result).GetMarketCode();
 
                                          targets.Add(new DailyData
                                          {
-                                             StockMarketCode = sepa[1], // 
+                                             StockMarketCode = string.Format("{0}-{1}", sepa[1], marketCode.GetMarketCode()), // 
                                              CompanyName = sepa[3],
-                                             MarketName = sepa[2], // MarketCodeからキャストが必要
+                                             MarketName = marketCode.GetMarketName(),
                                              OpeningPrice = string.IsNullOrWhiteSpace(sepa[4]) ? null : (double?)double.Parse(sepa[4]),
                                              HighPrice = string.IsNullOrWhiteSpace(sepa[5]) ? null : (double?)double.Parse(sepa[5]),
                                              LowPrice = string.IsNullOrWhiteSpace(sepa[6]) ? null : (double?)double.Parse(sepa[6]),
@@ -80,10 +86,8 @@ namespace StockDataImport.Services
                                          });
                                      }
 
-                                     var companies = context.StockCompany.ToList().Select(x => x.StockCode + "_" +  x.MarketCode);
+                                     var companies = context.StockCompany.ToList().Select(x => x.StockCode + "_" + x.MarketCode);
 
-                                     //var companyTargets = targets.Where(x => !companies.Contains(x.StockMarketCode.Substring(0, 4) + "_" + MarketCodeExtension.GetMarketCodeByMarketName(x.MarketName)))
-                                     //                            .Distinct(new DailyDataEqualityComparer()).ToList();
                                      var companyTargets = targets.Where(x => !companies.Contains(x.StockMarketCode.Substring(0, 4) + "_" + MarketCodeExtension.GetMarketCodeByMarketName(x.MarketName))).ToList();
 
                                      if (companyTargets.Any())
@@ -93,49 +97,12 @@ namespace StockDataImport.Services
                                              CompanyName = x.CompanyName,
                                              StockCode = x.StockMarketCode.Substring(0, 4),
                                              MarketCode = MarketCodeExtension.GetMarketCodeByMarketName(x.MarketName),
-                                             //DailyPrices = new List<DailyPrice>
-                                             //{
-                                             //    new DailyPrice
-                                             //    {
-                                             //       DealDate = dealDate,
-                                             //       OpeningPrice = x.OpeningPrice,
-                                             //       HighPrice = x.HighPrice,
-                                             //       LowPrice = x.LowPrice,
-                                             //       ClosingPrice = x.ClosingPrice,
-                                             //       Volume = x.Volume,
-                                             //       Turnover = x.Turnover
-                                             //    }
-                                             //}
                                          }));
                                      }
 
                                      context.SaveChanges();
 
                                      var companies2 = context.StockCompany.Select(x => new { x.StockCompanyId, x.StockCode, x.MarketCode }).ToList();
-
-                                     //var list = new List<DailyPrice>();
-
-                                     //targets.ForEach(x =>
-                                     //{
-                                     //    var id = companies2.FirstOrDefault(y => y.StockCode == x.StockMarketCode.Substring(0, 4) && y.MarketCode.GetMarketCode() == MarketCodeExtension.GetMarketCodeByMarketName(x.MarketName).GetMarketCode());
-
-                                     //    if (id == null)
-                                     //        return;
-
-                                     //    var dp = new DailyPrice()
-                                     //    {
-                                     //        StockCompanyId = id.StockCompanyId,
-                                     //        DealDate = dealDate,
-                                     //        OpeningPrice = x.OpeningPrice,
-                                     //        HighPrice = x.HighPrice,
-                                     //        LowPrice = x.LowPrice,
-                                     //        ClosingPrice = x.ClosingPrice,
-                                     //        Volume = x.Volume,
-                                     //        Turnover = x.Turnover
-                                     //    };
-
-
-                                     //});
 
                                      if (targets.Any())
                                      {

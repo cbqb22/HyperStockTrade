@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consts\FolderPaths.cs" />
     <Compile Include="Date\HolidayChecker.cs" />
     <Compile Include="Date\Services\Interfaces\IHolidayCheckService.cs" />
     <Compile Include="Date\Services\TolyoStockExchangeHolidayCheckService.cs" />

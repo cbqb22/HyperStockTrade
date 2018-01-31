@@ -47,7 +47,7 @@ namespace StockAnalyzer.Services
                                     .Where(x => x.DailyPrices.OrderByDescending(d => d.DealDate).FirstOrDefault().ClosingPrice * _magnification <= x.DailyPrices.Max(m => m.ClosingPrice) &&
                                     //.Where(x => x.DailyPrices.Min(m => m.ClosingPrice) * magnification <= x.DailyPrices.Max(m => m.ClosingPrice) &&
                                                 _minTurnover <= x.DailyPrices.Average(a => a.Turnover) &&
-                                                (x.MarketCode == MarketCode.TSE_Mothers || x.MarketCode == MarketCode.JQ_Standard))
+                                                (x.MarketCode == MarketCode.TSE_Mothers || x.MarketCode == MarketCode.JQ))
                                     .ToList()
                                     .Select(x => new PickedStockData
                                     {
@@ -76,7 +76,8 @@ namespace StockAnalyzer.Services
                                     .Where(x => x.DailyPrices.OrderByDescending(d => d.DealDate).FirstOrDefault().ClosingPrice * _magnification > x.DailyPrices.Max(m => m.ClosingPrice) &&
                                                 x.DailyPrices.Average(m => m.Volume) * 20 <= x.DailyPrices.Max(m => m.Volume) &&
                                                 _minTurnover <= x.DailyPrices.Average(a => a.Turnover) &&
-                                                (x.MarketCode == MarketCode.TSE_Mothers || x.MarketCode == MarketCode.JQ_Standard))
+                                                (x.MarketCode == MarketCode.TSE_Mothers || x.MarketCode == MarketCode.JQ))
+                                                //(x.MarketCode == MarketCode.TSE_Mothers || x.MarketCode == MarketCode.JQ_Standard))
                                     .ToList()
                                     .Select(x => new PickedStockData
                                     {
