@@ -130,6 +130,12 @@ namespace StockAnalyzer.Services
         }
 
 
+        /// <summary>
+        /// 期間中に50倍の出来高が１本以上存在するもの
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
         public IEnumerable<PickedStockData> Analyze4(DateTime start, DateTime end)
         {
             using (var context = _dataContextFactory.Create())
@@ -160,6 +166,44 @@ namespace StockAnalyzer.Services
                 return picked;
             }
         }
+
+        /// <summary>
+        /// 期間中にX倍の出来高がY本以上存在するもの
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public IEnumerable<PickedStockData> Analyze5(DateTime start, DateTime end)
+        {
+            using (var context = _dataContextFactory.Create())
+            {
+                var picked = context.StockCompany
+                                    .GroupBy(x => new { x.MarketCode, x.StockCode, x.CompanyName })
+                                    .Select(x => new { x.Key.MarketCode, x.Key.StockCode, x.Key.CompanyName, DailyPrices = x.SelectMany(xx => xx.DailyPrices).Where(d => start <= d.DealDate && d.DealDate <= end) })
+                                    .Select(x => new { x.StockCode, x.MarketCode, x.CompanyName, x.DailyPrices, Average10Volume = x.DailyPrices.OrderByDescending(d => d.DealDate).Take(10).Average(d => d.Volume), MaxVolume = x.DailyPrices.Max(d => d.Volume) })
+                                    .Where(x => x.MarketCode == MarketCode.TSE_Mothers || x.MarketCode == MarketCode.JQ)
+                                    .Where(x => _minTurnover <= x.DailyPrices.Average(a => a.Turnover))
+                                    .Where(x => 30 <= x.DailyPrices.Where(d => x.Average10Volume * 20 <= d.Volume).Count())
+                                    .ToList()
+                                    .Select(x => new PickedStockData
+                                    {
+                                        //StockCompanyId = x.StockCompanyId,
+                                        StockCode = x.StockCode,
+                                        MarketCode = x.MarketCode,
+                                        CompanyName = x.CompanyName,
+                                        CurrentPrice = x.DailyPrices.OrderByDescending(p => p.DealDate).First().ClosingPrice,
+                                        MaxPrice = x.DailyPrices.Max(m => m.ClosingPrice),
+                                        MinPrice = x.DailyPrices.Min(m => m.ClosingPrice),
+                                        AverageVolume = x.Average10Volume,
+                                        MaxVolume = x.MaxVolume
+                                    })
+                                    .Where(x => _limitLowPrice <= x.CurrentPrice)
+                                    .ToList();
+
+                return picked;
+            }
+        }
+
 
 
 

@@ -13,5 +13,6 @@ namespace StockAnalyzer.Services.Interfaces
         IEnumerable<PickedStockData> Analyze2(DateTime start, DateTime end);
         IEnumerable<PickedStockData> Analyze3(DateTime start, DateTime end);
         IEnumerable<PickedStockData> Analyze4(DateTime start, DateTime end);
+        IEnumerable<PickedStockData> Analyze5(DateTime start, DateTime end);
     }
 }
