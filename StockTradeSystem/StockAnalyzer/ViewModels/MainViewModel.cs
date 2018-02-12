@@ -104,7 +104,7 @@ namespace StockAnalyzer.ViewModels
         {
             var end = DateTime.Now;
             //var start = end.AddYears(-2);
-            var start = end.AddMonths(-12);
+            var start = end.AddMonths(-36);
             PickedStockDataList = _analyzeService.Analyze5(start, end);
         }
     }

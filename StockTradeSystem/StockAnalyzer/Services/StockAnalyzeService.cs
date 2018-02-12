@@ -48,7 +48,7 @@ namespace StockAnalyzer.Services
                                                 x.DailyPrices.Average(m => m.Volume) * 20 <= x.DailyPrices.Max(m => m.Volume) &&
                                                 _minTurnover <= x.DailyPrices.Average(a => a.Turnover) &&
                                                 (x.MarketCode == MarketCode.TSE_Mothers || x.MarketCode == MarketCode.JQ))
-                    //(x.MarketCode == MarketCode.TSE_Mothers || x.MarketCode == MarketCode.JQ_Standard))
+                                    //(x.MarketCode == MarketCode.TSE_Mothers || x.MarketCode == MarketCode.JQ_Standard))
                                     .ToList()
                                     .Select(x => new PickedStockData
                                     {
@@ -62,8 +62,8 @@ namespace StockAnalyzer.Services
                                         MaxVolume = x.DailyPrices.Max(m => m.Volume),
                                         AverageVolume = (int)x.DailyPrices.Average(m => m.Volume)
                                     })
-                    //.Where(x => _limitLowPrice <= x.CurrentPrice)
-                    //.Where(x => x.CurrentPrice <= x.MaxPrice / _magnification)
+                                    //.Where(x => _limitLowPrice <= x.CurrentPrice)
+                                    //.Where(x => x.CurrentPrice <= x.MaxPrice / _magnification)
                                     .ToList();
 
                 return picked;
@@ -106,9 +106,9 @@ namespace StockAnalyzer.Services
                 var picked = context.StockCompany
                                     .Select(x => new { x.StockCompanyId, x.StockCode, x.MarketCode, x.CompanyName, DailyPrices = x.DailyPrices.Where(d => start <= d.DealDate && d.DealDate <= end) })
                                     .Where(x => x.DailyPrices.OrderByDescending(d => d.DealDate).FirstOrDefault().ClosingPrice * _magnification > x.DailyPrices.Max(m => m.ClosingPrice) &&
-                                        //.Where(x => x.DailyPrices.Min(m => m.ClosingPrice) * magnification <= x.DailyPrices.Max(m => m.ClosingPrice) &&
-                                                _minTurnover <= x.DailyPrices.Average(a => a.Turnover) 
-                                                //&& (x.MarketCode == MarketCode.TSE_Mothers || x.MarketCode == MarketCode.JQ))
+                                                //.Where(x => x.DailyPrices.Min(m => m.ClosingPrice) * magnification <= x.DailyPrices.Max(m => m.ClosingPrice) &&
+                                                _minTurnover <= x.DailyPrices.Average(a => a.Turnover)
+                                           //&& (x.MarketCode == MarketCode.TSE_Mothers || x.MarketCode == MarketCode.JQ))
                                            )
                                     .ToList()
                                     .Select(x => new PickedStockData
@@ -141,11 +141,11 @@ namespace StockAnalyzer.Services
             using (var context = _dataContextFactory.Create())
             {
                 var picked = context.StockCompany
-                                    .GroupBy(x => new {x.MarketCode, x.StockCode, x.CompanyName})
-                                    .Select(x => new { x.Key.MarketCode, x.Key.StockCode, x.Key.CompanyName , DailyPrices = x.SelectMany(xx => xx.DailyPrices).Where(d => start <= d.DealDate && d.DealDate <= end) })
-                                    .Select(x => new { x.StockCode, x.MarketCode, x.CompanyName, x.DailyPrices, Average10Volume = x.DailyPrices.OrderByDescending(d => d.DealDate).Take(10).Average(d => d.Volume), MaxVolume = x.DailyPrices.Max(d => d.Volume) }) 
-                                    .Where (x => x.Average10Volume * 50 <= x.MaxVolume && _minTurnover <= x.DailyPrices.Average(a => a.Turnover)
-                                                 && (x.MarketCode == MarketCode.TSE_Mothers || x.MarketCode == MarketCode.JQ)
+                                    .GroupBy(x => new { x.MarketCode, x.StockCode, x.CompanyName })
+                                    .Select(x => new { x.Key.MarketCode, x.Key.StockCode, x.Key.CompanyName, DailyPrices = x.SelectMany(xx => xx.DailyPrices).Where(d => start <= d.DealDate && d.DealDate <= end) })
+                                    .Select(x => new { x.StockCode, x.MarketCode, x.CompanyName, x.DailyPrices, Average10Volume = x.DailyPrices.OrderByDescending(d => d.DealDate).Take(10).Average(d => d.Volume), MaxVolume = x.DailyPrices.Max(d => d.Volume) })
+                                    .Where(x => x.Average10Volume * 50 <= x.MaxVolume && _minTurnover <= x.DailyPrices.Average(a => a.Turnover)
+                                                && (x.MarketCode == MarketCode.TSE_Mothers || x.MarketCode == MarketCode.JQ)
                                            )
                                     .ToList()
                                     .Select(x => new PickedStockData
@@ -180,10 +180,11 @@ namespace StockAnalyzer.Services
                 var picked = context.StockCompany
                                     .GroupBy(x => new { x.MarketCode, x.StockCode, x.CompanyName })
                                     .Select(x => new { x.Key.MarketCode, x.Key.StockCode, x.Key.CompanyName, DailyPrices = x.SelectMany(xx => xx.DailyPrices).Where(d => start <= d.DealDate && d.DealDate <= end) })
-                                    .Select(x => new { x.StockCode, x.MarketCode, x.CompanyName, x.DailyPrices, Average10Volume = x.DailyPrices.OrderByDescending(d => d.DealDate).Take(10).Average(d => d.Volume), MaxVolume = x.DailyPrices.Max(d => d.Volume) })
+                                    .Select(x => new { x.StockCode, x.MarketCode, x.CompanyName, x.DailyPrices, CurrentPrice = x.DailyPrices.OrderByDescending(p => p.DealDate).First().ClosingPrice, MaxPrice = x.DailyPrices.Max(m => m.ClosingPrice), MinPrice = x.DailyPrices.Min(m => m.ClosingPrice), Average10Volume = x.DailyPrices.OrderByDescending(d => d.DealDate).Take(10).Average(d => d.Volume), MaxVolume = x.DailyPrices.Max(d => d.Volume) })
                                     .Where(x => x.MarketCode == MarketCode.TSE_Mothers || x.MarketCode == MarketCode.JQ)
-                                    .Where(x => _minTurnover <= x.DailyPrices.Average(a => a.Turnover))
+                                    //.Where(x => _minTurnover <= x.DailyPrices.Average(a => a.Turnover))
                                     .Where(x => 30 <= x.DailyPrices.Where(d => x.Average10Volume * 20 <= d.Volume).Count())
+                                    .Where(x => x.CurrentPrice * 1.1 <= x.MaxPrice)
                                     .ToList()
                                     .Select(x => new PickedStockData
                                     {
@@ -191,9 +192,9 @@ namespace StockAnalyzer.Services
                                         StockCode = x.StockCode,
                                         MarketCode = x.MarketCode,
                                         CompanyName = x.CompanyName,
-                                        CurrentPrice = x.DailyPrices.OrderByDescending(p => p.DealDate).First().ClosingPrice,
-                                        MaxPrice = x.DailyPrices.Max(m => m.ClosingPrice),
-                                        MinPrice = x.DailyPrices.Min(m => m.ClosingPrice),
+                                        CurrentPrice = x.CurrentPrice,
+                                        MaxPrice = x.MaxPrice,
+                                        MinPrice = x.MinPrice,
                                         AverageVolume = x.Average10Volume,
                                         MaxVolume = x.MaxVolume
                                     })
