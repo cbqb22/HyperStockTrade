@@ -9,10 +9,6 @@ namespace StockAnalyzer.Services.Interfaces
 {
     public interface IStockAnalyzeService
     {
-        IEnumerable<PickedStockData> Analyze(DateTime start, DateTime end);
-        IEnumerable<PickedStockData> Analyze2(DateTime start, DateTime end);
-        IEnumerable<PickedStockData> Analyze3(DateTime start, DateTime end);
-        IEnumerable<PickedStockData> Analyze4(DateTime start, DateTime end);
-        IEnumerable<PickedStockData> Analyze5(DateTime start, DateTime end);
+        IEnumerable<PickedStockData> Analyze(DateTime start, DateTime end, AnalyzeType type);
     }
 }

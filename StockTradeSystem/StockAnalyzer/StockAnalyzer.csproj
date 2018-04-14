@@ -81,6 +81,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\AnalyzeType.cs" />
     <Compile Include="Models\ComboBoxItem.cs" />
     <Compile Include="Models\Csv\PickedStockDataMap.cs" />
     <Compile Include="Models\Interfaces\IComboBoxItem.cs" />

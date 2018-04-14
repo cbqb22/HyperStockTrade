@@ -17,6 +17,7 @@ namespace StockAnalyzer.ViewModels
         #region Fields
 
         private const string BaseUrlFormat = "https://stocks.finance.yahoo.co.jp/stocks/chart/?code={0}.T&ct=z&t={1}&q=c&l=off&z=m&p=m65,m130,s&a=v";
+        private const int DefaultSelectSpanIndex = 4;
 
         #endregion
 
@@ -39,6 +40,13 @@ namespace StockAnalyzer.ViewModels
 
         #region Properties
 
+        private DateTime _startDate = DateTime.Now.AddDays(-1);
+        public DateTime StartDate { get { return _startDate; } set { Set(ref _startDate, value); } }
+
+        private DateTime _endDate = DateTime.Now;
+        public DateTime EndDate { get { return _endDate; } set { Set(ref _endDate, value); } }
+
+
         private IEnumerable<PickedStockData> _pickedStockDataList;
         public IEnumerable<PickedStockData> PickedStockDataList { get { return _pickedStockDataList; } set { Set(ref _pickedStockDataList, value); } }
 
@@ -48,11 +56,24 @@ namespace StockAnalyzer.ViewModels
         private PickedStockData _selectedItem;
         public PickedStockData SelectedItem { get { return _selectedItem; } set { Set(ref _selectedItem, value); } }
 
-        private List<IComboBoxItem<string>> _spanItems;
-        public List<IComboBoxItem<string>> SpanItems { get { return _spanItems; } set { Set(ref _spanItems, value); } }
+        private List<IComboBoxItem<string>> _spanItems = new List<IComboBoxItem<string>>()
+            {
+                new ComboBoxItem<string>{ Id = "1m", Name = "‚P‚©ŒŽ"},
+                new ComboBoxItem<string>{ Id = "3m", Name = "‚R‚©ŒŽ"},
+                new ComboBoxItem<string>{ Id = "6m", Name = "‚U‚©ŒŽ"},
+                new ComboBoxItem<string>{ Id = "1y", Name = "‚P”N"},
+                new ComboBoxItem<string>{ Id = "2y", Name = "‚Q”N"},
+                new ComboBoxItem<string>{ Id = "5y", Name = "‚T”N"},
+                new ComboBoxItem<string>{ Id = "ay", Name = "‚P‚O”N"},
+            };
+        public List<IComboBoxItem<string>> SpanItems { get { return _spanItems; }}
 
         private IComboBoxItem<string> _selectedSpan;
         public IComboBoxItem<string> SelectedSpan { get { return _selectedSpan; } set { Set(ref _selectedSpan, value); } }
+
+        private int _selectSpanIndex;
+        public int SelectSpanIndex { get { return _selectSpanIndex; } set { Set(ref _selectSpanIndex, value); } }
+
 
         #endregion
 
@@ -70,16 +91,11 @@ namespace StockAnalyzer.ViewModels
             ItemSelectionChangedCommand = new RelayCommand(ItemSelectionChanged);
 
             PickedStockDataList = new List<PickedStockData>();
-            SpanItems = new List<IComboBoxItem<string>>()
-            {
-                new ComboBoxItem<string>{ Id = "1m", Name = "‚P‚©ŒŽ"},
-                new ComboBoxItem<string>{ Id = "3m", Name = "‚R‚©ŒŽ"},
-                new ComboBoxItem<string>{ Id = "6m", Name = "‚U‚©ŒŽ"},
-                new ComboBoxItem<string>{ Id = "1y", Name = "‚P”N"},
-                new ComboBoxItem<string>{ Id = "2y", Name = "‚Q”N"},
-                new ComboBoxItem<string>{ Id = "5y", Name = "‚T”N"},
-                new ComboBoxItem<string>{ Id = "ay", Name = "‚P‚O”N"},
-            };
+            SelectSpanIndex = DefaultSelectSpanIndex;
+            EndDate = DateTime.Now;
+            StartDate = EndDate.AddMonths(-6);
+
+
         }
 
         private void ItemSelectionChanged()
@@ -102,10 +118,9 @@ namespace StockAnalyzer.ViewModels
 
         private void Analyze()
         {
-            var end = DateTime.Now;
-            //var start = end.AddYears(-2);
-            var start = end.AddMonths(-24);
-            PickedStockDataList = _analyzeService.Analyze5(start, end);
+            if (EndDate <= StartDate)
+                return;
+            PickedStockDataList = _analyzeService.Analyze(StartDate, EndDate, AnalyzeType.Type1);
         }
     }
 }
