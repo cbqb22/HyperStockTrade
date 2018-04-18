@@ -1,5 +1,4 @@
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
 using StockAnalyzer.Services.Interfaces;
 using System.Windows.Input;
 using System;
@@ -8,10 +7,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using StockAnalyzer.Models.Interfaces;
-using System.Windows.Controls;
+using System.Threading.Tasks;
+using MIC.Common.Commands.Interfaces;
 
 namespace StockAnalyzer.ViewModels
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class MainViewModel : ViewModelBase
     {
         #region Fields
@@ -46,7 +49,6 @@ namespace StockAnalyzer.ViewModels
         private DateTime _endDate = DateTime.Now;
         public DateTime EndDate { get { return _endDate; } set { Set(ref _endDate, value); } }
 
-
         private IEnumerable<PickedStockData> _pickedStockDataList;
         public IEnumerable<PickedStockData> PickedStockDataList { get { return _pickedStockDataList; } set { Set(ref _pickedStockDataList, value); } }
 
@@ -77,6 +79,8 @@ namespace StockAnalyzer.ViewModels
 
         #endregion
 
+        #region Constructors
+
         /// <summary>
         /// 
         /// </summary>
@@ -86,26 +90,36 @@ namespace StockAnalyzer.ViewModels
             _analyzeService = analyzeService;
             _csvService = csvService;
 
-            AnalyzeCommand = new RelayCommand(Analyze);
-            CsvCommand = new RelayCommand(WriteToCsv);
-            ItemSelectionChangedCommand = new RelayCommand(ItemSelectionChanged);
+            AnalyzeCommand = new AsyncRelayCommand(AnalyzeAsync);
+            CsvCommand = new AsyncRelayCommand(WriteToCsvAsync);
+            ItemSelectionChangedCommand = new AsyncRelayCommand(ItemSelectionChanged);
 
             PickedStockDataList = new List<PickedStockData>();
             SelectSpanIndex = DefaultSelectSpanIndex;
             EndDate = DateTime.Now;
             StartDate = EndDate.AddMonths(-6);
-
-
         }
 
-        private void ItemSelectionChanged()
+        #endregion
+
+        #region Command Handlers
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private async Task ItemSelectionChanged()
         {
             if (SelectedItem == null || SelectedSpan == null)
                 return;
-            Url = string.Format(BaseUrlFormat, SelectedItem.StockCode, SelectedSpan.Id);
+            await Task.Run(() => Url = string.Format(BaseUrlFormat, SelectedItem.StockCode, SelectedSpan.Id));
         }
 
-        private void WriteToCsv()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private async Task WriteToCsvAsync()
         {
             var folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "SBIƒ}ƒNƒ");
             if (!Directory.Exists(folderPath))
@@ -113,14 +127,20 @@ namespace StockAnalyzer.ViewModels
 
             var filePath = Path.Combine(folderPath, DateTime.Now.ToString("yyyyMMddHHmmss") + ".csv");
             if (PickedStockDataList != null && PickedStockDataList.Any())
-                _csvService.Write(filePath, PickedStockDataList);
+                await Task.Run(() => _csvService.Write(filePath, PickedStockDataList));
         }
 
-        private void Analyze()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private async Task AnalyzeAsync()
         {
             if (EndDate <= StartDate)
                 return;
-            PickedStockDataList = _analyzeService.Analyze(StartDate, EndDate, AnalyzeType.Type1);
+            await Task.Run(() => PickedStockDataList = _analyzeService.Analyze(StartDate, EndDate, AnalyzeType.Type1));
         }
+
+        #endregion
     }
 }
