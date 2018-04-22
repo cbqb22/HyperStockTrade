@@ -32,7 +32,6 @@ C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Common\bin\Debug\GalaSoft.M
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Common\bin\Debug\GalaSoft.MvvmLight.Platform.xml
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Common\obj\Debug\MIC.Common.dll
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Common\obj\Debug\MIC.Common.pdb
-C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Common\obj\Debug\MIC.Common.csprojResolveAssemblyReference.cache
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Common\bin\Debug\Microsoft.Practices.ServiceLocation.dll
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Common\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Common\bin\Debug\Microsoft.Practices.ServiceLocation.xml

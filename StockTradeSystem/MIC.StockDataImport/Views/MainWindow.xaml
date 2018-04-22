@@ -1,0 +1,30 @@
+﻿<Window x:Class="MIC.StockDataImport.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525"
+        DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
+        >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0">
+            <StackPanel Orientation="Horizontal">
+                <DatePicker SelectedDate="{Binding StartDate}" x:Name="StartDate"/>
+                <TextBlock VerticalAlignment="Center" Text="～"/>
+                <DatePicker SelectedDate="{Binding EndDate}" x:Name="EndDate"/>
+            </StackPanel>
+        </Grid>
+        
+        <Grid Grid.Row="1">
+            <Button Content="開始"  
+                Width="200"
+                Height="50"
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Center" 
+                Command="{Binding DownloadCommand}" />
+        </Grid>
+    </Grid>
+</Window>

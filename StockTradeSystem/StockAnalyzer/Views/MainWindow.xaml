@@ -10,6 +10,24 @@
         WindowState="Maximized"
         DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
         Title="MainWindow">
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style x:Key="CommonButton" TargetType="Button">
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="Width" Value="100" />
+            </Style>
+            <Style TargetType="DatePicker">
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="Width" Value="100" />
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
@@ -50,8 +68,8 @@
             </Grid>
 
             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Content="解析"  VerticalAlignment="Center"  Width="100" Command="{Binding AnalyzeCommand}" />
-                    <Button Content="CSV"  VerticalAlignment="Center"  Width="100" Command="{Binding CsvCommand}" />
+                <Button Style="{StaticResource CommonButton}" Content="解析" Width="100" Command="{Binding AnalyzeCommand}" />
+                <Button Style="{StaticResource CommonButton}" Content="CSV" Width="100" Command="{Binding CsvCommand}" />
             </StackPanel>
         </Grid>
 

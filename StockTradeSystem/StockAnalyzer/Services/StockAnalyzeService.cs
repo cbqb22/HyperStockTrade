@@ -22,7 +22,6 @@ namespace StockAnalyzer.Services
         #region Fields
 
         private int _limitLowPrice = 150;
-        private double _magnification = 1.5;
         private int _minTurnover = 500 * 10000;
 
         #endregion
