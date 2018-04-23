@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:command="http://www.galasoft.ch/mvvmlight"
+        x:Name="window"
         mc:Ignorable="d"
         xmlns:util="clr-namespace:StockAnalyzer.Views.Utils"
         WindowState="Maximized"
@@ -12,6 +13,7 @@
         Title="MainWindow">
     <Window.Resources>
         <ResourceDictionary>
+
             <Style x:Key="CommonButton" TargetType="Button">
                 <Setter Property="VerticalAlignment" Value="Stretch" />
                 <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -26,23 +28,29 @@
                 <Setter Property="Padding" Value="0" />
                 <Setter Property="Width" Value="100" />
             </Style>
+            
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MIC.Common;component/Resources/ProgressStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="auto" />
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" Orientation="Horizontal">
-                <TextBlock Width="100" TextAlignment="Right" VerticalAlignment="Center" Text="{Binding PickedStockDataList.Count,Mode=OneWay}" />
-                <TextBlock Text="件" VerticalAlignment="Center" />
-                <ComboBox
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock Width="100" TextAlignment="Right" VerticalAlignment="Center" Text="{Binding PickedStockDataList.Count,Mode=OneWay}" />
+                    <TextBlock Text="件" VerticalAlignment="Center" />
+                    <ComboBox
                     Margin="20,0,0,0"
                     ItemsSource="{Binding SpanItems}"
                     DisplayMemberPath="Name"
@@ -51,34 +59,34 @@
                     SelectedIndex="{Binding SelectSpanIndex}"
                     VerticalContentAlignment="Center"
                     Width="100">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectionChanged">
-                            <command:EventToCommand Command="{Binding ItemSelectionChangedCommand}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </ComboBox>
-            </StackPanel>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <command:EventToCommand Command="{Binding ItemSelectionChangedCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                </StackPanel>
 
-            <Grid Grid.Column="1">
-                <StackPanel Orientation="Horizontal">
-                    <DatePicker Width="150" SelectedDate="{Binding StartDate}" x:Name="StartDate"/>
-                    <TextBlock VerticalAlignment="Center" Text="～"/>
-                    <DatePicker Width="150" SelectedDate="{Binding EndDate}" x:Name="EndDate"/>
+                <Grid Grid.Column="1">
+                    <StackPanel Orientation="Horizontal">
+                        <DatePicker Width="150" SelectedDate="{Binding StartDate}" x:Name="StartDate"/>
+                        <TextBlock VerticalAlignment="Center" Text="～"/>
+                        <DatePicker Width="150" SelectedDate="{Binding EndDate}" x:Name="EndDate"/>
+                    </StackPanel>
+                </Grid>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Style="{StaticResource CommonButton}" Content="解析" Width="100" Command="{Binding AnalyzeCommand}" />
+                    <Button Style="{StaticResource CommonButton}" Content="CSV" Width="100" Command="{Binding CsvCommand}" />
                 </StackPanel>
             </Grid>
 
-            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Style="{StaticResource CommonButton}" Content="解析" Width="100" Command="{Binding AnalyzeCommand}" />
-                <Button Style="{StaticResource CommonButton}" Content="CSV" Width="100" Command="{Binding CsvCommand}" />
-            </StackPanel>
-        </Grid>
-
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="1.5*" />
-            </Grid.ColumnDefinitions>
-            <DataGrid
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="1.5*" />
+                </Grid.ColumnDefinitions>
+                <DataGrid
                 AlternatingRowBackground="AliceBlue"
                 AutoGenerateColumns="False"
                 CanUserResizeRows="False"
@@ -88,26 +96,55 @@
                 SelectedItem="{Binding SelectedItem}"
                 ItemsSource="{Binding PickedStockDataList}"
                 SelectionMode="Single">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <command:EventToCommand Command="{Binding ItemSelectionChangedCommand}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="銘柄コード" Binding="{Binding StockCode}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="市場コード" Binding="{Binding MarketCode}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="名称" Binding="{Binding CompanyName}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="現在値" Binding="{Binding CurrentPrice}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="高値" Binding="{Binding MaxPrice}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="安値" Binding="{Binding MinPrice}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="最高出来高" Binding="{Binding MaxVolume}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="平均出来高" Binding="{Binding AverageVolume}" IsReadOnly="True"/>
-                </DataGrid.Columns>
-            </DataGrid>
-            <WebBrowser Grid.Column="1"
-              util:WebBrowserUtility.BindableSource="{Binding Url}"
-              Name="webBrowser1">
-            </WebBrowser>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <command:EventToCommand Command="{Binding ItemSelectionChangedCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="銘柄コード" Binding="{Binding StockCode}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="市場コード" Binding="{Binding MarketCode}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="名称" Binding="{Binding CompanyName}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="現在値" Binding="{Binding CurrentPrice}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="高値" Binding="{Binding MaxPrice}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="安値" Binding="{Binding MinPrice}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="最高出来高" Binding="{Binding MaxVolume}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="平均出来高" Binding="{Binding AverageVolume}" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <WebBrowser
+                     Grid.Column="1"
+                     util:WebBrowserUtility.BindableSource="{Binding Url}"
+                     Name="webBrowser1">
+                    <WebBrowser.Style>
+                        <Style TargetType="WebBrowser">
+                            <Setter Property="Visibility" Value="Visible" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsProgress}" Value="True">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </WebBrowser.Style>
+                </WebBrowser>
+            </Grid>
         </Grid>
+
+        <Border>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Control Name="busyAnimation" Style="{StaticResource BusyAnimationStyle}" Visibility="Visible"/>
+                <!--<TextBlock Text="処理中.." TextAlignment="Center" FontSize="14" FontWeight="Bold" />-->
+            </StackPanel>
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsProgress}" Value="True">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+        </Border>
     </Grid>
 </Window>

@@ -9,13 +9,14 @@ using System.IO;
 using StockAnalyzer.Models.Interfaces;
 using System.Threading.Tasks;
 using MIC.Common.Commands.Interfaces;
+using MIC.Common.ViewModelBases;
 
 namespace StockAnalyzer.ViewModels
 {
     /// <summary>
     /// 
     /// </summary>
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : ProgressViewModelBase
     {
         #region Fields
 
@@ -136,9 +137,12 @@ namespace StockAnalyzer.ViewModels
         /// <returns></returns>
         private async Task AnalyzeAsync()
         {
-            if (EndDate <= StartDate)
-                return;
-            await Task.Run(() => PickedStockDataList = _analyzeService.Analyze(StartDate, EndDate, AnalyzeType.Type1));
+            using (GetProgress())
+            {
+                if (EndDate <= StartDate)
+                    return;
+                await Task.Run(() => PickedStockDataList = _analyzeService.Analyze(StartDate, EndDate, AnalyzeType.Type1));
+            }
         }
 
         #endregion
