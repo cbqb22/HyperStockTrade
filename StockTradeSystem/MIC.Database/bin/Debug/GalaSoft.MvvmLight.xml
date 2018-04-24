@@ -16,24 +16,32 @@
             This will enable (or restore) the CommandManager class which handles
             automatic enabling/disabling of controls based on the CanExecute delegate.</remarks>
         </member>
-        <member name="M:GalaSoft.MvvmLight.Command.RelayCommand.#ctor(System.Action)">
+        <member name="M:GalaSoft.MvvmLight.Command.RelayCommand.#ctor(System.Action,System.Boolean)">
             <summary>
             Initializes a new instance of the RelayCommand class that 
             can always execute.
             </summary>
-            <param name="execute">The execution logic. IMPORTANT: Note that closures are not supported at the moment
-            due to the use of WeakActions (see http://stackoverflow.com/questions/25730530/). </param>
+            <param name="execute">The execution logic. IMPORTANT: If the action causes a closure,
+            you must set keepTargetAlive to true to avoid side effects. </param>
+            <param name="keepTargetAlive">If true, the target of the Action will
+            be kept as a hard reference, which might cause a memory leak. You should only set this
+            parameter to true if the action is causing a closure. See
+            http://galasoft.ch/s/mvvmweakaction. </param>
             <exception cref="T:System.ArgumentNullException">If the execute argument is null.</exception>
         </member>
-        <member name="M:GalaSoft.MvvmLight.Command.RelayCommand.#ctor(System.Action,System.Func{System.Boolean})">
+        <member name="M:GalaSoft.MvvmLight.Command.RelayCommand.#ctor(System.Action,System.Func{System.Boolean},System.Boolean)">
             <summary>
             Initializes a new instance of the RelayCommand class.
             </summary>
-            <param name="execute">The execution logic. IMPORTANT: Note that closures are not supported at the moment
-            due to the use of WeakActions (see http://stackoverflow.com/questions/25730530/). </param>
-            <param name="canExecute">The execution status logic.</param>
-            <exception cref="T:System.ArgumentNullException">If the execute argument is null. IMPORTANT: Note that closures are not supported at the moment
-            due to the use of WeakActions (see http://stackoverflow.com/questions/25730530/). </exception>
+            <param name="execute">The execution logic. IMPORTANT: If the action causes a closure,
+            you must set keepTargetAlive to true to avoid side effects. </param>
+            <param name="canExecute">The execution status logic.  IMPORTANT: If the func causes a closure,
+            you must set keepTargetAlive to true to avoid side effects. </param>
+            <param name="keepTargetAlive">If true, the target of the Action will
+            be kept as a hard reference, which might cause a memory leak. You should only set this
+            parameter to true if the action is causing a closures. See
+            http://galasoft.ch/s/mvvmweakaction. </param>
+            <exception cref="T:System.ArgumentNullException">If the execute argument is null.</exception>
         </member>
         <member name="E:GalaSoft.MvvmLight.Command.RelayCommand.CanExecuteChanged">
             <summary>
@@ -71,23 +79,31 @@
             This will enable (or restore) the CommandManager class which handles
             automatic enabling/disabling of controls based on the CanExecute delegate.</remarks>
         </member>
-        <member name="M:GalaSoft.MvvmLight.Command.RelayCommand`1.#ctor(System.Action{`0})">
+        <member name="M:GalaSoft.MvvmLight.Command.RelayCommand`1.#ctor(System.Action{`0},System.Boolean)">
             <summary>
             Initializes a new instance of the RelayCommand class that 
             can always execute.
             </summary>
-            <param name="execute">The execution logic. IMPORTANT: Note that closures are not supported at the moment
-            due to the use of WeakActions (see http://stackoverflow.com/questions/25730530/). </param>
+            <param name="execute">The execution logic. IMPORTANT: If the action causes a closure,
+            you must set keepTargetAlive to true to avoid side effects. </param>
+            <param name="keepTargetAlive">If true, the target of the Action will
+            be kept as a hard reference, which might cause a memory leak. You should only set this
+            parameter to true if the action is causing a closure. See
+            http://galasoft.ch/s/mvvmweakaction. </param>
             <exception cref="T:System.ArgumentNullException">If the execute argument is null.</exception>
         </member>
-        <member name="M:GalaSoft.MvvmLight.Command.RelayCommand`1.#ctor(System.Action{`0},System.Func{`0,System.Boolean})">
+        <member name="M:GalaSoft.MvvmLight.Command.RelayCommand`1.#ctor(System.Action{`0},System.Func{`0,System.Boolean},System.Boolean)">
             <summary>
             Initializes a new instance of the RelayCommand class.
             </summary>
-            <param name="execute">The execution logic. IMPORTANT: Note that closures are not supported at the moment
-            due to the use of WeakActions (see http://stackoverflow.com/questions/25730530/). </param>
-            <param name="canExecute">The execution status logic. IMPORTANT: Note that closures are not supported at the moment
-            due to the use of WeakActions (see http://stackoverflow.com/questions/25730530/). </param>
+            <param name="execute">The execution logic. IMPORTANT: If the action causes a closure,
+            you must set keepTargetAlive to true to avoid side effects. </param>
+            <param name="canExecute">The execution status logic.  IMPORTANT: If the func causes a closure,
+            you must set keepTargetAlive to true to avoid side effects. </param>
+            <param name="keepTargetAlive">If true, the target of the Action will
+            be kept as a hard reference, which might cause a memory leak. You should only set this
+            parameter to true if the action is causing a closure. See
+            http://galasoft.ch/s/mvvmweakaction. </param>
             <exception cref="T:System.ArgumentNullException">If the execute argument is null.</exception>
         </member>
         <member name="E:GalaSoft.MvvmLight.Command.RelayCommand`1.CanExecuteChanged">
@@ -201,6 +217,13 @@
             method is anonymous.
             </summary>
         </member>
+        <member name="P:GalaSoft.MvvmLight.Helpers.WeakAction.LiveReference">
+            <summary>
+            Saves the <see cref="P:GalaSoft.MvvmLight.Helpers.WeakAction.ActionReference"/> as a hard reference. This is
+            used in relation with this instance's constructor and only if
+            the constructor's keepTargetAlive parameter is true.
+            </summary>
+        </member>
         <member name="P:GalaSoft.MvvmLight.Helpers.WeakAction.Reference">
             <summary>
             Gets or sets a WeakReference to the target passed when constructing
@@ -219,18 +242,26 @@
             Initializes an empty instance of the <see cref="T:GalaSoft.MvvmLight.Helpers.WeakAction" /> class.
             </summary>
         </member>
-        <member name="M:GalaSoft.MvvmLight.Helpers.WeakAction.#ctor(System.Action)">
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakAction.#ctor(System.Action,System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:GalaSoft.MvvmLight.Helpers.WeakAction" /> class.
             </summary>
             <param name="action">The action that will be associated to this instance.</param>
+            <param name="keepTargetAlive">If true, the target of the Action will
+            be kept as a hard reference, which might cause a memory leak. You should only set this
+            parameter to true if the action is using closures. See
+            http://galasoft.ch/s/mvvmweakaction. </param>
         </member>
-        <member name="M:GalaSoft.MvvmLight.Helpers.WeakAction.#ctor(System.Object,System.Action)">
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakAction.#ctor(System.Object,System.Action,System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:GalaSoft.MvvmLight.Helpers.WeakAction" /> class.
             </summary>
             <param name="target">The action's owner.</param>
             <param name="action">The action that will be associated to this instance.</param>
+            <param name="keepTargetAlive">If true, the target of the Action will
+            be kept as a hard reference, which might cause a memory leak. You should only set this
+            parameter to true if the action is using closures. See
+            http://galasoft.ch/s/mvvmweakaction. </param>
         </member>
         <member name="P:GalaSoft.MvvmLight.Helpers.WeakAction.IsAlive">
             <summary>
@@ -278,18 +309,26 @@
             by the Garbage Collector already.
             </summary>
         </member>
-        <member name="M:GalaSoft.MvvmLight.Helpers.WeakAction`1.#ctor(System.Action{`0})">
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakAction`1.#ctor(System.Action{`0},System.Boolean)">
             <summary>
             Initializes a new instance of the WeakAction class.
             </summary>
             <param name="action">The action that will be associated to this instance.</param>
+            <param name="keepTargetAlive">If true, the target of the Action will
+            be kept as a hard reference, which might cause a memory leak. You should only set this
+            parameter to true if the action is using closures. See
+            http://galasoft.ch/s/mvvmweakaction. </param>
         </member>
-        <member name="M:GalaSoft.MvvmLight.Helpers.WeakAction`1.#ctor(System.Object,System.Action{`0})">
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakAction`1.#ctor(System.Object,System.Action{`0},System.Boolean)">
             <summary>
             Initializes a new instance of the WeakAction class.
             </summary>
             <param name="target">The action's owner.</param>
             <param name="action">The action that will be associated to this instance.</param>
+            <param name="keepTargetAlive">If true, the target of the Action will
+            be kept as a hard reference, which might cause a memory leak. You should only set this
+            parameter to true if the action is using closures. See
+            http://galasoft.ch/s/mvvmweakaction. </param>
         </member>
         <member name="M:GalaSoft.MvvmLight.Helpers.WeakAction`1.Execute">
             <summary>
@@ -353,6 +392,13 @@
             method is anonymous.
             </summary>
         </member>
+        <member name="P:GalaSoft.MvvmLight.Helpers.WeakFunc`1.LiveReference">
+            <summary>
+            Saves the <see cref="P:GalaSoft.MvvmLight.Helpers.WeakFunc`1.FuncReference"/> as a hard reference. This is
+            used in relation with this instance's constructor and only if
+            the constructor's keepTargetAlive parameter is true.
+            </summary>
+        </member>
         <member name="P:GalaSoft.MvvmLight.Helpers.WeakFunc`1.Reference">
             <summary>
             Gets or sets a WeakReference to the target passed when constructing
@@ -366,18 +412,26 @@
             Initializes an empty instance of the WeakFunc class.
             </summary>
         </member>
-        <member name="M:GalaSoft.MvvmLight.Helpers.WeakFunc`1.#ctor(System.Func{`0})">
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakFunc`1.#ctor(System.Func{`0},System.Boolean)">
             <summary>
             Initializes a new instance of the WeakFunc class.
             </summary>
             <param name="func">The Func that will be associated to this instance.</param>
+            <param name="keepTargetAlive">If true, the target of the Action will
+            be kept as a hard reference, which might cause a memory leak. You should only set this
+            parameter to true if the action is using closures. See
+            http://galasoft.ch/s/mvvmweakaction. </param>
         </member>
-        <member name="M:GalaSoft.MvvmLight.Helpers.WeakFunc`1.#ctor(System.Object,System.Func{`0})">
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakFunc`1.#ctor(System.Object,System.Func{`0},System.Boolean)">
             <summary>
             Initializes a new instance of the WeakFunc class.
             </summary>
             <param name="target">The Func's owner.</param>
             <param name="func">The Func that will be associated to this instance.</param>
+            <param name="keepTargetAlive">If true, the target of the Action will
+            be kept as a hard reference, which might cause a memory leak. You should only set this
+            parameter to true if the action is using closures. See
+            http://galasoft.ch/s/mvvmweakaction. </param>
         </member>
         <member name="P:GalaSoft.MvvmLight.Helpers.WeakFunc`1.IsAlive">
             <summary>
@@ -430,18 +484,26 @@
             by the Garbage Collector already.
             </summary>
         </member>
-        <member name="M:GalaSoft.MvvmLight.Helpers.WeakFunc`2.#ctor(System.Func{`0,`1})">
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakFunc`2.#ctor(System.Func{`0,`1},System.Boolean)">
             <summary>
             Initializes a new instance of the WeakFunc class.
             </summary>
             <param name="func">The Func that will be associated to this instance.</param>
+            <param name="keepTargetAlive">If true, the target of the Action will
+            be kept as a hard reference, which might cause a memory leak. You should only set this
+            parameter to true if the action is using closures. See
+            http://galasoft.ch/s/mvvmweakaction. </param>
         </member>
-        <member name="M:GalaSoft.MvvmLight.Helpers.WeakFunc`2.#ctor(System.Object,System.Func{`0,`1})">
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakFunc`2.#ctor(System.Object,System.Func{`0,`1},System.Boolean)">
             <summary>
             Initializes a new instance of the WeakFunc class.
             </summary>
             <param name="target">The Func's owner.</param>
             <param name="func">The Func that will be associated to this instance.</param>
+            <param name="keepTargetAlive">If true, the target of the Action will
+            be kept as a hard reference, which might cause a memory leak. You should only set this
+            parameter to true if the action is using closures. See
+            http://galasoft.ch/s/mvvmweakaction. </param>
         </member>
         <member name="M:GalaSoft.MvvmLight.Helpers.WeakFunc`2.Execute">
             <summary>
@@ -529,7 +591,7 @@
             The Messenger is a class allowing objects to exchange messages.
             </summary>
         </member>
-        <member name="M:GalaSoft.MvvmLight.Messaging.IMessenger.Register``1(System.Object,System.Action{``0})">
+        <member name="M:GalaSoft.MvvmLight.Messaging.IMessenger.Register``1(System.Object,System.Action{``0},System.Boolean)">
             <summary>
             Registers a recipient for a type of message TMessage. The action
             parameter will be executed when a corresponding message is sent.
@@ -542,8 +604,12 @@
             <param name="action">The action that will be executed when a message
             of type TMessage is sent. IMPORTANT: Note that closures are not supported at the moment
             due to the use of WeakActions (see http://stackoverflow.com/questions/25730530/). </param>
+            <param name="keepTargetAlive">If true, the target of the Action will
+            be kept as a hard reference, which might cause a memory leak. You should only set this
+            parameter to true if the action is using closures. See
+            http://galasoft.ch/s/mvvmweakaction. </param>
         </member>
-        <member name="M:GalaSoft.MvvmLight.Messaging.IMessenger.Register``1(System.Object,System.Object,System.Action{``0})">
+        <member name="M:GalaSoft.MvvmLight.Messaging.IMessenger.Register``1(System.Object,System.Object,System.Action{``0},System.Boolean)">
             <summary>
             Registers a recipient for a type of message TMessage.
             The action parameter will be executed when a corresponding 
@@ -563,10 +629,13 @@
             get the message. Similarly, messages sent without any token, or with a different
             token, will not be delivered to that recipient.</param>
             <param name="action">The action that will be executed when a message
-            of type TMessage is sent. IMPORTANT: Note that closures are not supported at the moment
-            due to the use of WeakActions (see http://stackoverflow.com/questions/25730530/). </param>
+            of type TMessage is sent.</param>
+            <param name="keepTargetAlive">If true, the target of the Action will
+            be kept as a hard reference, which might cause a memory leak. You should only set this
+            parameter to true if the action is using closures. See
+            http://galasoft.ch/s/mvvmweakaction. </param>
         </member>
-        <member name="M:GalaSoft.MvvmLight.Messaging.IMessenger.Register``1(System.Object,System.Object,System.Boolean,System.Action{``0})">
+        <member name="M:GalaSoft.MvvmLight.Messaging.IMessenger.Register``1(System.Object,System.Object,System.Boolean,System.Action{``0},System.Boolean)">
             <summary>
             Registers a recipient for a type of message TMessage.
             The action parameter will be executed when a corresponding 
@@ -597,10 +666,13 @@
             and ExecuteOrderMessage to the recipient that registered.</para>
             </param>
             <param name="action">The action that will be executed when a message
-            of type TMessage is sent. IMPORTANT: Note that closures are not supported at the moment
-            due to the use of WeakActions (see http://stackoverflow.com/questions/25730530/). </param>
+            of type TMessage is sent.</param>
+            <param name="keepTargetAlive">If true, the target of the Action will
+            be kept as a hard reference, which might cause a memory leak. You should only set this
+            parameter to true if the action is using closures. See
+            http://galasoft.ch/s/mvvmweakaction. </param>
         </member>
-        <member name="M:GalaSoft.MvvmLight.Messaging.IMessenger.Register``1(System.Object,System.Boolean,System.Action{``0})">
+        <member name="M:GalaSoft.MvvmLight.Messaging.IMessenger.Register``1(System.Object,System.Boolean,System.Action{``0},System.Boolean)">
             <summary>
             Registers a recipient for a type of message TMessage.
             The action parameter will be executed when a corresponding 
@@ -625,8 +697,11 @@
             and ExecuteOrderMessage to the recipient that registered.</para>
             </param>
             <param name="action">The action that will be executed when a message
-            of type TMessage is sent. IMPORTANT: Note that closures are not supported at the moment
-            due to the use of WeakActions (see http://stackoverflow.com/questions/25730530/). </param>
+            of type TMessage is sent.</param>
+            <param name="keepTargetAlive">If true, the target of the Action will
+            be kept as a hard reference, which might cause a memory leak. You should only set this
+            parameter to true if the action is using closures. See
+            http://galasoft.ch/s/mvvmweakaction. </param>
         </member>
         <member name="M:GalaSoft.MvvmLight.Messaging.IMessenger.Send``1(``0)">
             <summary>
@@ -773,7 +848,7 @@
             to register and send messages in a static manner.
             </summary>
         </member>
-        <member name="M:GalaSoft.MvvmLight.Messaging.Messenger.Register``1(System.Object,System.Action{``0})">
+        <member name="M:GalaSoft.MvvmLight.Messaging.Messenger.Register``1(System.Object,System.Action{``0},System.Boolean)">
             <summary>
             Registers a recipient for a type of message TMessage. The action
             parameter will be executed when a corresponding message is sent.
@@ -784,10 +859,14 @@
             for.</typeparam>
             <param name="recipient">The recipient that will receive the messages.</param>
             <param name="action">The action that will be executed when a message
-            of type TMessage is sent. IMPORTANT: Note that closures are not supported at the moment
-            due to the use of WeakActions (see http://stackoverflow.com/questions/25730530/). </param>
+            of type TMessage is sent. IMPORTANT: If the action causes a closure,
+            you must set keepTargetAlive to true to avoid side effects. </param>
+            <param name="keepTargetAlive">If true, the target of the Action will
+            be kept as a hard reference, which might cause a memory leak. You should only set this
+            parameter to true if the action is using closures. See
+            http://galasoft.ch/s/mvvmweakaction. </param>
         </member>
-        <member name="M:GalaSoft.MvvmLight.Messaging.Messenger.Register``1(System.Object,System.Boolean,System.Action{``0})">
+        <member name="M:GalaSoft.MvvmLight.Messaging.Messenger.Register``1(System.Object,System.Object,System.Action{``0},System.Boolean)">
             <summary>
             Registers a recipient for a type of message TMessage.
             The action parameter will be executed when a corresponding 
@@ -796,32 +875,8 @@
             messages implementing TMessage) can be received too.
             <para>Registering a recipient does not create a hard reference to it,
             so if this recipient is deleted, no memory leak is caused.</para>
-            </summary>
-            <typeparam name="TMessage">The type of message that the recipient registers
-            for.</typeparam>
-            <param name="recipient">The recipient that will receive the messages.</param>
-            <param name="receiveDerivedMessagesToo">If true, message types deriving from
-            TMessage will also be transmitted to the recipient. For example, if a SendOrderMessage
-            and an ExecuteOrderMessage derive from OrderMessage, registering for OrderMessage
-            and setting receiveDerivedMessagesToo to true will send SendOrderMessage
-            and ExecuteOrderMessage to the recipient that registered.
-            <para>Also, if TMessage is an interface, message types implementing TMessage will also be
-            transmitted to the recipient. For example, if a SendOrderMessage
-            and an ExecuteOrderMessage implement IOrderMessage, registering for IOrderMessage
-            and setting receiveDerivedMessagesToo to true will send SendOrderMessage
-            and ExecuteOrderMessage to the recipient that registered.</para>
-            </param>
-            <param name="action">The action that will be executed when a message
-            of type TMessage is sent. IMPORTANT: Note that closures are not supported at the moment
-            due to the use of WeakActions (see http://stackoverflow.com/questions/25730530/). </param>
-        </member>
-        <member name="M:GalaSoft.MvvmLight.Messaging.Messenger.Register``1(System.Object,System.Object,System.Action{``0})">
-            <summary>
-            Registers a recipient for a type of message TMessage.
-            The action parameter will be executed when a corresponding 
-            message is sent.
-            <para>Registering a recipient does not create a hard reference to it,
-            so if this recipient is deleted, no memory leak is caused.</para>
+            <para>However if you use closures and set keepTargetAlive to true, you might
+            cause a memory leak if you don't call <see cref="M:GalaSoft.MvvmLight.Messaging.Messenger.Unregister(System.Object)"/> when you are cleaning up.</para>
             </summary>
             <typeparam name="TMessage">The type of message that the recipient registers
             for.</typeparam>
@@ -833,10 +888,14 @@
             get the message. Similarly, messages sent without any token, or with a different
             token, will not be delivered to that recipient.</param>
             <param name="action">The action that will be executed when a message
-            of type TMessage is sent. IMPORTANT: Note that closures are not supported at the moment
-            due to the use of WeakActions (see http://stackoverflow.com/questions/25730530/). </param>
+            of type TMessage is sent. IMPORTANT: If the action causes a closure,
+            you must set keepTargetAlive to true to avoid side effects. </param>
+            <param name="keepTargetAlive">If true, the target of the Action will
+            be kept as a hard reference, which might cause a memory leak. You should only set this
+            parameter to true if the action is using closures. See
+            http://galasoft.ch/s/mvvmweakaction. </param>
         </member>
-        <member name="M:GalaSoft.MvvmLight.Messaging.Messenger.Register``1(System.Object,System.Object,System.Boolean,System.Action{``0})">
+        <member name="M:GalaSoft.MvvmLight.Messaging.Messenger.Register``1(System.Object,System.Object,System.Boolean,System.Action{``0},System.Boolean)">
             <summary>
             Registers a recipient for a type of message TMessage.
             The action parameter will be executed when a corresponding 
@@ -867,8 +926,44 @@
             and ExecuteOrderMessage to the recipient that registered.</para>
             </param>
             <param name="action">The action that will be executed when a message
-            of type TMessage is sent. IMPORTANT: Note that closures are not supported at the moment
-            due to the use of WeakActions (see http://stackoverflow.com/questions/25730530/). </param>
+            of type TMessage is sent. IMPORTANT: If the action causes a closure,
+            you must set keepTargetAlive to true to avoid side effects. </param>
+            <param name="keepTargetAlive">If true, the target of the Action will
+            be kept as a hard reference, which might cause a memory leak. You should only set this
+            parameter to true if the action is using closures. See
+            http://galasoft.ch/s/mvvmweakaction. </param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.Messenger.Register``1(System.Object,System.Boolean,System.Action{``0},System.Boolean)">
+            <summary>
+            Registers a recipient for a type of message TMessage.
+            The action parameter will be executed when a corresponding 
+            message is sent. See the receiveDerivedMessagesToo parameter
+            for details on how messages deriving from TMessage (or, if TMessage is an interface,
+            messages implementing TMessage) can be received too.
+            <para>Registering a recipient does not create a hard reference to it,
+            so if this recipient is deleted, no memory leak is caused.</para>
+            </summary>
+            <typeparam name="TMessage">The type of message that the recipient registers
+            for.</typeparam>
+            <param name="recipient">The recipient that will receive the messages.</param>
+            <param name="receiveDerivedMessagesToo">If true, message types deriving from
+            TMessage will also be transmitted to the recipient. For example, if a SendOrderMessage
+            and an ExecuteOrderMessage derive from OrderMessage, registering for OrderMessage
+            and setting receiveDerivedMessagesToo to true will send SendOrderMessage
+            and ExecuteOrderMessage to the recipient that registered.
+            <para>Also, if TMessage is an interface, message types implementing TMessage will also be
+            transmitted to the recipient. For example, if a SendOrderMessage
+            and an ExecuteOrderMessage implement IOrderMessage, registering for IOrderMessage
+            and setting receiveDerivedMessagesToo to true will send SendOrderMessage
+            and ExecuteOrderMessage to the recipient that registered.</para>
+            </param>
+            <param name="action">The action that will be executed when a message
+            of type TMessage is sent. IMPORTANT: If the action causes a closure,
+            you must set keepTargetAlive to true to avoid side effects. </param>
+            <param name="keepTargetAlive">If true, the target of the Action will
+            be kept as a hard reference, which might cause a memory leak. You should only set this
+            parameter to true if the action is using closures. See
+            http://galasoft.ch/s/mvvmweakaction. </param>
         </member>
         <member name="M:GalaSoft.MvvmLight.Messaging.Messenger.Send``1(``0)">
             <summary>

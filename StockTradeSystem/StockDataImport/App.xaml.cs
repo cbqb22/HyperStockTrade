@@ -1,16 +1,9 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Threading;
-using Microsoft.Practices.ServiceLocation;
-using StockDataImport.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using MIC.Database;
 using MIC.Common;
+using CommonServiceLocator;
 
 namespace StockDataImport
 {

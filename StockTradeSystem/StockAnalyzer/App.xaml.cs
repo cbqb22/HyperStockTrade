@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Threading;
-using Microsoft.Practices.ServiceLocation;
 using MIC.Database;
+using CommonServiceLocator;
 
 namespace StockAnalyzer
 {

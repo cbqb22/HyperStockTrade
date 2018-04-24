@@ -16,24 +16,32 @@
             This will enable (or restore) the CommandManager class which handles
             automatic enabling/disabling of controls based on the CanExecute delegate.</remarks>
         </member>
-        <member name="M:GalaSoft.MvvmLight.CommandWpf.RelayCommand.#ctor(System.Action)">
+        <member name="M:GalaSoft.MvvmLight.CommandWpf.RelayCommand.#ctor(System.Action,System.Boolean)">
             <summary>
             Initializes a new instance of the RelayCommand class that 
             can always execute.
             </summary>
-            <param name="execute">The execution logic. IMPORTANT: Note that closures are not supported at the moment
-            due to the use of WeakActions (see http://stackoverflow.com/questions/25730530/). </param>
+            <param name="execute">The execution logic. IMPORTANT: If the action causes a closure,
+            you must set keepTargetAlive to true to avoid side effects. </param>
+            <param name="keepTargetAlive">If true, the target of the Action will
+            be kept as a hard reference, which might cause a memory leak. You should only set this
+            parameter to true if the action is causing a closure. See
+            http://galasoft.ch/s/mvvmweakaction. </param>
             <exception cref="T:System.ArgumentNullException">If the execute argument is null.</exception>
         </member>
-        <member name="M:GalaSoft.MvvmLight.CommandWpf.RelayCommand.#ctor(System.Action,System.Func{System.Boolean})">
+        <member name="M:GalaSoft.MvvmLight.CommandWpf.RelayCommand.#ctor(System.Action,System.Func{System.Boolean},System.Boolean)">
             <summary>
             Initializes a new instance of the RelayCommand class.
             </summary>
-            <param name="execute">The execution logic. IMPORTANT: Note that closures are not supported at the moment
-            due to the use of WeakActions (see http://stackoverflow.com/questions/25730530/). </param>
-            <param name="canExecute">The execution status logic.</param>
-            <exception cref="T:System.ArgumentNullException">If the execute argument is null. IMPORTANT: Note that closures are not supported at the moment
-            due to the use of WeakActions (see http://stackoverflow.com/questions/25730530/). </exception>
+            <param name="execute">The execution logic. IMPORTANT: If the action causes a closure,
+            you must set keepTargetAlive to true to avoid side effects. </param>
+            <param name="canExecute">The execution status logic.  IMPORTANT: If the func causes a closure,
+            you must set keepTargetAlive to true to avoid side effects. </param>
+            <param name="keepTargetAlive">If true, the target of the Action will
+            be kept as a hard reference, which might cause a memory leak. You should only set this
+            parameter to true if the action is causing a closures. See
+            http://galasoft.ch/s/mvvmweakaction. </param>
+            <exception cref="T:System.ArgumentNullException">If the execute argument is null.</exception>
         </member>
         <member name="E:GalaSoft.MvvmLight.CommandWpf.RelayCommand.CanExecuteChanged">
             <summary>
@@ -71,23 +79,31 @@
             This will enable (or restore) the CommandManager class which handles
             automatic enabling/disabling of controls based on the CanExecute delegate.</remarks>
         </member>
-        <member name="M:GalaSoft.MvvmLight.CommandWpf.RelayCommand`1.#ctor(System.Action{`0})">
+        <member name="M:GalaSoft.MvvmLight.CommandWpf.RelayCommand`1.#ctor(System.Action{`0},System.Boolean)">
             <summary>
             Initializes a new instance of the RelayCommand class that 
             can always execute.
             </summary>
-            <param name="execute">The execution logic. IMPORTANT: Note that closures are not supported at the moment
-            due to the use of WeakActions (see http://stackoverflow.com/questions/25730530/). </param>
+            <param name="execute">The execution logic. IMPORTANT: If the action causes a closure,
+            you must set keepTargetAlive to true to avoid side effects. </param>
+            <param name="keepTargetAlive">If true, the target of the Action will
+            be kept as a hard reference, which might cause a memory leak. You should only set this
+            parameter to true if the action is causing a closure. See
+            http://galasoft.ch/s/mvvmweakaction. </param>
             <exception cref="T:System.ArgumentNullException">If the execute argument is null.</exception>
         </member>
-        <member name="M:GalaSoft.MvvmLight.CommandWpf.RelayCommand`1.#ctor(System.Action{`0},System.Func{`0,System.Boolean})">
+        <member name="M:GalaSoft.MvvmLight.CommandWpf.RelayCommand`1.#ctor(System.Action{`0},System.Func{`0,System.Boolean},System.Boolean)">
             <summary>
             Initializes a new instance of the RelayCommand class.
             </summary>
-            <param name="execute">The execution logic. IMPORTANT: Note that closures are not supported at the moment
-            due to the use of WeakActions (see http://stackoverflow.com/questions/25730530/). </param>
-            <param name="canExecute">The execution status logic. IMPORTANT: Note that closures are not supported at the moment
-            due to the use of WeakActions (see http://stackoverflow.com/questions/25730530/). </param>
+            <param name="execute">The execution logic. IMPORTANT: If the action causes a closure,
+            you must set keepTargetAlive to true to avoid side effects. </param>
+            <param name="canExecute">The execution status logic.  IMPORTANT: If the func causes a closure,
+            you must set keepTargetAlive to true to avoid side effects. </param>
+            <param name="keepTargetAlive">If true, the target of the Action will
+            be kept as a hard reference, which might cause a memory leak. You should only set this
+            parameter to true if the action is causing a closure. See
+            http://galasoft.ch/s/mvvmweakaction. </param>
             <exception cref="T:System.ArgumentNullException">If the execute argument is null.</exception>
         </member>
         <member name="E:GalaSoft.MvvmLight.CommandWpf.RelayCommand`1.CanExecuteChanged">
