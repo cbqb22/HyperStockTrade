@@ -1,4 +1,3 @@
-using GalaSoft.MvvmLight;
 using StockAnalyzer.Services.Interfaces;
 using System.Windows.Input;
 using System;
@@ -10,6 +9,7 @@ using StockAnalyzer.Models.Interfaces;
 using System.Threading.Tasks;
 using MIC.Common.Commands.Interfaces;
 using MIC.Common.ViewModelBases;
+using MIC.Common.Dialogs.Extensions;
 
 namespace StockAnalyzer.ViewModels
 {
@@ -38,6 +38,7 @@ namespace StockAnalyzer.ViewModels
 
         public ICommand AnalyzeCommand { get; set; }
         public ICommand CsvCommand { get; set; }
+        public ICommand ImportCommand { get; set; }
         public ICommand ItemSelectionChangedCommand { get; set; }
 
         #endregion
@@ -93,6 +94,7 @@ namespace StockAnalyzer.ViewModels
 
             AnalyzeCommand = new AsyncRelayCommand(AnalyzeAsync);
             CsvCommand = new AsyncRelayCommand(WriteToCsvAsync);
+            ImportCommand = new AsyncRelayCommand(ImportAsync);
             ItemSelectionChangedCommand = new AsyncRelayCommand(ItemSelectionChanged);
 
             PickedStockDataList = new List<PickedStockData>();
@@ -100,6 +102,16 @@ namespace StockAnalyzer.ViewModels
             EndDate = DateTime.Now;
             StartDate = EndDate.AddMonths(-6);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private async Task ImportAsync()
+        {
+            await this.RequestShowDialog("Import");
+        }
+
 
         #endregion
 

@@ -5,9 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:command="http://www.galasoft.ch/mvvmlight"
+        xmlns:util="clr-namespace:StockAnalyzer.Views.Utils"
+        xmlns:dialogBehavior="clr-namespace:MIC.Common.Dialogs.Behaviors;assembly=MIC.Common"
+        xmlns:views="clr-namespace:MIC.StockDataImport.Views;assembly=MIC.StockDataImport"
+        d:DesignWidth="1300"
+        d:DesignHeight="700"
         x:Name="window"
         mc:Ignorable="d"
-        xmlns:util="clr-namespace:StockAnalyzer.Views.Utils"
         WindowState="Maximized"
         DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
         Title="MainWindow">
@@ -34,6 +38,19 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
+
+    <i:Interaction.Behaviors>
+        <dialogBehavior:ShowDialogBehavior>
+            <dialogBehavior:ShowMessageDialogItem
+                        Button="OKCancel"
+                        DefaultResult="Cancel"
+                        Image="Question"
+                        Token="Confirm" />
+            <dialogBehavior:ShowCustomDialogItem Dialog="{x:Type views:MainWindow}" Token="Import" />
+        </dialogBehavior:ShowDialogBehavior>
+    </i:Interaction.Behaviors>
+
+
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -78,6 +95,7 @@
                 <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Style="{StaticResource CommonButton}" Content="解析" Width="100" Command="{Binding AnalyzeCommand}" />
                     <Button Style="{StaticResource CommonButton}" Content="CSV" Width="100" Command="{Binding CsvCommand}" />
+                    <Button Style="{StaticResource CommonButton}" Content="インポート" Width="100" Command="{Binding ImportCommand}" />
                 </StackPanel>
             </Grid>
 

@@ -87,7 +87,7 @@
     <Compile Include="Consts\FolderPaths.cs" />
     <Compile Include="Date\HolidayChecker.cs" />
     <Compile Include="Date\Services\Interfaces\IHolidayCheckService.cs" />
-    <Compile Include="Date\Services\TolyoStockExchangeHolidayCheckService.cs" />
+    <Compile Include="Date\Services\ToshoStockExchangeHolidayCheckService.cs" />
     <Compile Include="Dialogs\Behaviors\AbstractShowDialogItem.cs" />
     <Compile Include="Dialogs\Behaviors\ShowColorDialogItem.cs" />
     <Compile Include="Dialogs\Behaviors\ShowCustomDialogItem.cs" />
@@ -96,9 +96,11 @@
     <Compile Include="Dialogs\Behaviors\ShowFileSelectDialogItem.cs" />
     <Compile Include="Dialogs\Behaviors\ShowMessageDialogItem.cs" />
     <Compile Include="Dialogs\Behaviors\ShowPrintDialogItem.cs" />
+    <Compile Include="Dialogs\Extensions\ShowDialogExtension.cs" />
     <Compile Include="Dialogs\Interfaces\IDialogParameterService.cs" />
     <Compile Include="Dialogs\Messaging\ReturnValueHolder.cs" />
     <Compile Include="Dialogs\Messaging\ShowDialogMessage.cs" />
+    <Compile Include="Dialogs\Services\DialogParameterService.cs" />
     <Compile Include="ExtensionMethods\StringExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CommonStartup.cs" />

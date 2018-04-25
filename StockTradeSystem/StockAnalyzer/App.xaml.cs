@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Threading;
 using MIC.Database;
+using MIC.Common;
 using CommonServiceLocator;
 
 namespace StockAnalyzer
@@ -21,6 +22,7 @@ namespace StockAnalyzer
         {
             StockAnalyzerStartup.RegisterServices();
             DatabaseStartup.RegisterServices();
+            CommonStartup.RegisterServices();
         }
     }
 }

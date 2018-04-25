@@ -142,6 +142,10 @@
       <Project>{319f8fdb-00f1-497c-bf8b-58a2e86bda91}</Project>
       <Name>MIC.Database</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MIC.StockDataImport\MIC.StockDataImport.csproj">
+      <Project>{267547e8-b2ef-47f3-af46-8b4cde2810f5}</Project>
+      <Name>MIC.StockDataImport</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

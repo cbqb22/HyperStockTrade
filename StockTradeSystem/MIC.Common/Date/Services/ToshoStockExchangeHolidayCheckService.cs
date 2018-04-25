@@ -10,7 +10,7 @@ namespace MIC.Common.Date.Services
     /// <summary>
     /// 東京証券取引所の休業日をチェックします。
     /// </summary>
-    public class TolyoStockExchangeHolidayCheckService : IHolidayCheckService
+    public class ToshoStockExchangeHolidayCheckService : IHolidayCheckService
     {
         public bool IsHoliday(DateTime date)
         {
