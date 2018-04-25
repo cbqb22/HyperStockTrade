@@ -4,11 +4,11 @@
 namespace MIC.StockDataImport.Views
 {
     /// <summary>
-    /// MainWindow.xaml の相互作用ロジック
+    /// StockDataImportWindow.xaml の相互作用ロジック
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class StockDataImportWindow : Window
     {
-        public MainWindow()
+        public StockDataImportWindow()
         {
             InitializeComponent();
         }

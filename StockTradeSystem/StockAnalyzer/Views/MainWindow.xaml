@@ -46,7 +46,7 @@
                         DefaultResult="Cancel"
                         Image="Question"
                         Token="Confirm" />
-            <dialogBehavior:ShowCustomDialogItem Dialog="{x:Type views:MainWindow}" Token="Import" />
+            <dialogBehavior:ShowCustomDialogItem Dialog="{x:Type views:StockDataImportWindow}" Token="Import" />
         </dialogBehavior:ShowDialogBehavior>
     </i:Interaction.Behaviors>
 

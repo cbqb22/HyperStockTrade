@@ -1,0 +1,60 @@
+﻿<Window x:Class="MIC.StockDataImport.Views.StockDataImportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="インポート" 
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterOwner"
+        DataContext="{Binding StockDataImportViewModel, Source={StaticResource Locator}}"
+        >
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MIC.Common;component/Resources/ProgressStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Margin="30">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="50" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <StackPanel Orientation="Horizontal">
+                    <DatePicker SelectedDate="{Binding StartDate}" x:Name="StartDate"/>
+                    <TextBlock VerticalAlignment="Center" Text="～"/>
+                    <DatePicker SelectedDate="{Binding EndDate}" x:Name="EndDate"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Button Content="開始"  
+                Width="100"
+                Height="30"
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Center" 
+                Command="{Binding DownloadCommand}" />
+            </Grid>
+        </Grid>
+
+        <Border>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Control Name="busyAnimation" Style="{StaticResource BusyAnimationStyle}" Visibility="Visible"/>
+                <!--<TextBlock Text="処理中.." TextAlignment="Center" FontSize="14" FontWeight="Bold" />-->
+            </StackPanel>
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsProgress}" Value="True">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+        </Border>
+    </Grid>
+</Window>

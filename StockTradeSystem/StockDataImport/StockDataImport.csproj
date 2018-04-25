@@ -92,7 +92,7 @@
     <Compile Include="Services\MuzinzouDataDownloadService.cs" />
     <Compile Include="Services\MuzinzouDailyDataImportService.cs" />
     <Compile Include="Services\StockDataBackupService.cs" />
-    <Compile Include="StoclDataImportStartup.cs" />
+    <Compile Include="StockDataImportStartup.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="MainWindow.xaml">

@@ -16,14 +16,14 @@ namespace MIC.StockDataImport.ViewModels
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<StockDataImportViewModel>();
         }
 
-        public MainViewModel MainViewModel
+        public StockDataImportViewModel MainViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
+                return ServiceLocator.Current.GetInstance<StockDataImportViewModel>();
             }
         }
         

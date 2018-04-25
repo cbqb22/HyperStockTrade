@@ -1,7 +1,10 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using MIC.Common.Commands.Interfaces;
+using MIC.Common.ViewModelBases;
 using MIC.StockDataImport.Services.Interfaces;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace MIC.StockDataImport.ViewModels
@@ -9,7 +12,7 @@ namespace MIC.StockDataImport.ViewModels
     /// <summary>
     /// 
     /// </summary>
-    public class MainViewModel : ViewModelBase
+    public class StockDataImportViewModel : ProgressViewModelBase
     {
         #region Properties
 
@@ -40,7 +43,7 @@ namespace MIC.StockDataImport.ViewModels
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainViewModel(IStockDataDownloadService downloadService,
+        public StockDataImportViewModel(IStockDataDownloadService downloadService,
                              IStockDataImportService importService,
                              IStockDataBackupService backupService)
         {
@@ -48,21 +51,24 @@ namespace MIC.StockDataImport.ViewModels
             _importService = importService;
             _backupService = backupService;
 
-            DownloadCommand = new RelayCommand(Download);
+            DownloadCommand = new AsyncRelayCommand(DownloadAsync);
         }
 
-        private async void Download()
+        private async Task DownloadAsync()
         {
             var current = _startDate;
             var end = _endDate;
 
-            while (current <= end)
+            using (GetProgress("ダウンロード"))
             {
-                await _backupService.BackupAsync();
-                await _downloadService.DownloadAsync(current);
-                await _importService.ImportAsync(_downloadService.OutputPath);
+                while (current <= end)
+                {
+                    await _backupService.BackupAsync();
+                    await _downloadService.DownloadAsync(current);
+                    await _importService.ImportAsync(_downloadService.OutputPath);
 
-                current = current.AddDays(1);
+                    current = current.AddDays(1);
+                }
             }
         }
     }

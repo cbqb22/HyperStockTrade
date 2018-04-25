@@ -1,6 +1,7 @@
 using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using MIC.StockDataImport.ViewModels;
 
 namespace StockAnalyzer.ViewModels
 {
@@ -18,6 +19,7 @@ namespace StockAnalyzer.ViewModels
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<StockDataImportViewModel>();
         }
 
         public MainViewModel MainViewModel
@@ -27,7 +29,17 @@ namespace StockAnalyzer.ViewModels
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
+
+        public StockDataImportViewModel StockDataImportViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<StockDataImportViewModel>();
+            }
+        }
+
         
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
