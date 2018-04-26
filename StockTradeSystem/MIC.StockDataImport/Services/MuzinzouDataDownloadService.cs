@@ -22,7 +22,7 @@ namespace MIC.StockDataImport.Services
 
         #region Fields
 
-        private const string UrlFormat = "http://souba-data.com/k_data/{0}/{1}_{2}/T{3}.zip";  //http://souba-data.com/k_data/2017/17_01/T170104.zip
+        private const string UrlFormat = "http://souba-data.com/k_data/{0}/{1}_{2}/T{3}{4}";  //http://souba-data.com/k_data/2017/17_01/T170104.zip 2014年以前は.lzh
         private const string FileNameFormat = "T{0}";
         private string OutputZip = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"Stock\Muzinzou", "Zip");
         private string Output = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"Stock\Muzinzou");
@@ -50,6 +50,8 @@ namespace MIC.StockDataImport.Services
         #endregion
 
 
+        private Func<DateTime, string> GetCompression = (dt) => dt.Year <= 2014 ? ".lzh" : ".zip";
+
         public async Task DownloadAsync(DateTime date)
         {
             if (_holidayCheckService.IsHoliday(date))
@@ -58,15 +60,17 @@ namespace MIC.StockDataImport.Services
             if (IsImported(date))
                 return;
 
+            var compression = GetCompression(date);
+
             OutputPath = Path.Combine(Output, string.Format(FileNameFormat , date.ToString("yyMMdd")) + ".csv"); // T170104.csv
-            Uri = new Uri(string.Format(UrlFormat, date.ToString("yyyy"), date.ToString("yy"), date.ToString("MM"), date.ToString("yyMMdd")));
+            Uri = new Uri(string.Format(UrlFormat, date.ToString("yyyy"), date.ToString("yy"), date.ToString("MM"), date.ToString("yyMMdd"), compression));
 
             if (!RemoteFileExists(Uri.AbsoluteUri))
                 return;
 
             try
             {
-                var outputZip = Path.Combine(OutputZip, string.Format(FileNameFormat , date.ToString("yyMMdd")) + ".zip");
+                var outputZip = Path.Combine(OutputZip, string.Format(FileNameFormat , date.ToString("yyMMdd")) + compression);
 
                 var wc = new WebClient();
                 await wc.DownloadFileTaskAsync(Uri.AbsoluteUri, outputZip);

@@ -31,9 +31,6 @@ C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Common\bin\Debug\GalaSoft.M
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Common\bin\Debug\GalaSoft.MvvmLight.Platform.xml
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Common\obj\Debug\MIC.Common.dll
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Common\obj\Debug\MIC.Common.pdb
-C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Common\bin\Debug\Microsoft.Practices.ServiceLocation.dll
-C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Common\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
-C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Common\bin\Debug\Microsoft.Practices.ServiceLocation.xml
 C:\Users\poohace\Documents\HyperStockTrade2\StockTradeSystem\MIC.Common\bin\Debug\MIC.Common.dll
 C:\Users\poohace\Documents\HyperStockTrade2\StockTradeSystem\MIC.Common\bin\Debug\MIC.Common.pdb
 C:\Users\poohace\Documents\HyperStockTrade2\StockTradeSystem\MIC.Common\bin\Debug\EntityFramework.dll
@@ -73,3 +70,13 @@ C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Common\bin\Debug\CsvHelper.
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Common\bin\Debug\CsvHelper.xml
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Common\bin\Debug\CsvHelper.pdb
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Common\obj\Debug\MIC.Common.csprojResolveAssemblyReference.cache
+C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Common\bin\Debug\MIC.Common.dll.config
+C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Common\bin\Debug\CommonServiceLocator.dll
+C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Common\bin\Debug\CsvHelper.dll
+C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Common\bin\Debug\Microsoft.WindowsAPICodePack.dll
+C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Common\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Common\bin\Debug\CsvHelper.pdb
+C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Common\bin\Debug\CsvHelper.xml
+C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Common\bin\Debug\Microsoft.WindowsAPICodePack.xml
+C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Common\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml
+C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Common\obj\Debug\MIC.Common.csprojResolveAssemblyReference.cache

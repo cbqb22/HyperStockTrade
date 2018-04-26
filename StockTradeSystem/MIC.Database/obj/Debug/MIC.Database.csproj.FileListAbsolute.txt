@@ -27,7 +27,6 @@ C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Deb
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\GalaSoft.MvvmLight.dll
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\GalaSoft.MvvmLight.Extras.dll
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\GalaSoft.MvvmLight.Platform.dll
-C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\Microsoft.Practices.ServiceLocation.dll
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\System.Windows.Interactivity.dll
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\EntityFramework.xml
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\EntityFramework.SqlServer.xml
@@ -37,8 +36,6 @@ C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Deb
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\GalaSoft.MvvmLight.Extras.xml
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\GalaSoft.MvvmLight.Platform.xml
-C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
-C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\Microsoft.Practices.ServiceLocation.xml
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\obj\Debug\MIC.Database.csprojResolveAssemblyReference.cache
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\obj\Debug\MIC.Database.Migrations.AddVersionTable.resources
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\obj\Debug\MIC.Database.csproj.GenerateResource.Cache
@@ -95,3 +92,9 @@ C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\Microsof
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\CsvHelper.dll
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\CsvHelper.pdb
 C:\Users\m_mikami\Documents\HST\StockTradeSystem\MIC.Database\bin\Debug\CsvHelper.xml
+C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\CommonServiceLocator.dll
+C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\Microsoft.WindowsAPICodePack.dll
+C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\CsvHelper.pdb
+C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml
+C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Database\bin\Debug\Microsoft.WindowsAPICodePack.xml
