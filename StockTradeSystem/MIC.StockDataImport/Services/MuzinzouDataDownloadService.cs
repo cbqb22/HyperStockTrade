@@ -1,4 +1,6 @@
-﻿using MIC.Common.Date.Services.Interfaces;
+﻿using MIC.Common.Archives.Lzhs;
+using MIC.Common.Date.Services.Interfaces;
+using MIC.Common.Enums;
 using MIC.Database.Connection.DataContexts;
 using MIC.Database.Connection.Services.Interfaces;
 using MIC.StockDataImport.Services.Interfaces;
@@ -50,7 +52,7 @@ namespace MIC.StockDataImport.Services
         #endregion
 
 
-        private Func<DateTime, string> GetCompression = (dt) => dt.Year <= 2014 ? ".lzh" : ".zip";
+        private Func<DateTime, FileExt> GetCompression = (dt) => dt.Year <= 2014 ? FileExt.Lzh : FileExt.Zip;
 
         public async Task DownloadAsync(DateTime date)
         {
@@ -63,14 +65,14 @@ namespace MIC.StockDataImport.Services
             var compression = GetCompression(date);
 
             OutputPath = Path.Combine(Output, string.Format(FileNameFormat , date.ToString("yyMMdd")) + ".csv"); // T170104.csv
-            Uri = new Uri(string.Format(UrlFormat, date.ToString("yyyy"), date.ToString("yy"), date.ToString("MM"), date.ToString("yyMMdd"), compression));
+            Uri = new Uri(string.Format(UrlFormat, date.ToString("yyyy"), date.ToString("yy"), date.ToString("MM"), date.ToString("yyMMdd"), compression.GetExtension()));
 
             if (!RemoteFileExists(Uri.AbsoluteUri))
                 return;
 
             try
             {
-                var outputZip = Path.Combine(OutputZip, string.Format(FileNameFormat , date.ToString("yyMMdd")) + compression);
+                var outputZip = Path.Combine(OutputZip, string.Format(FileNameFormat , date.ToString("yyMMdd")) + compression.GetExtension());
 
                 var wc = new WebClient();
                 await wc.DownloadFileTaskAsync(Uri.AbsoluteUri, outputZip);
@@ -79,7 +81,13 @@ namespace MIC.StockDataImport.Services
                     File.Delete(OutputPath);
 
                 // ZIP解凍処理
-                ZipFile.ExtractToDirectory(outputZip, Output);
+                if (compression == FileExt.Zip)
+                    ZipFile.ExtractToDirectory(outputZip, Output);
+                // Lzh解凍処理
+                else
+                    UnlhaManager.UnLzh(outputZip, Output);
+
+
 
             }
             catch (AggregateException ex)
