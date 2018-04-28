@@ -48,38 +48,41 @@ namespace MIC.StockDataImport.Services
         #endregion
 
 
-        public async Task DownloadAsync(DateTime date)
+        public Task DownloadAsync(DateTime date)
         {
-            if (_holidayCheckService.IsHoliday(date))
-                return;
-
-            if (IsImported(date))
-                return;
-
-            OutputPath = Path.Combine(Output, date.ToString("yyyyMMdd") + ".csv");
-            Uri = new Uri(string.Format(UrlFormat, date.Year.ToString().PadLeft(2, '0'), date.Month.ToString().PadLeft(2, '0'), date.Day.ToString().PadLeft(2, '0')));
-
-            if (!RemoteFileExists(Uri.AbsoluteUri))
-                return;
-
-            try
+            return Task.Run(async () =>
             {
-                await Task.Delay(500);
+                if (_holidayCheckService.IsHoliday(date))
+                    return;
 
-                var wc = new WebClient();
-                await wc.DownloadFileTaskAsync(Uri.AbsoluteUri, OutputPath);
+                if (IsImported(date))
+                    return;
 
-                if (File.Exists(OutputPath) && new FileInfo(OutputPath).Length == 0)
-                    File.Delete(OutputPath);
-            }
-            catch (AggregateException ex)
-            {
-                throw ex.Flatten().GetBaseException();
-            }
-            catch (Exception ex)
-            {
-                throw ex.GetBaseException();
-            }
+                OutputPath = Path.Combine(Output, date.ToString("yyyyMMdd") + ".csv");
+                Uri = new Uri(string.Format(UrlFormat, date.Year.ToString().PadLeft(2, '0'), date.Month.ToString().PadLeft(2, '0'), date.Day.ToString().PadLeft(2, '0')));
+
+                if (!RemoteFileExists(Uri.AbsoluteUri))
+                    return;
+
+                try
+                {
+                    await Task.Delay(500);
+
+                    var wc = new WebClient();
+                    await wc.DownloadFileTaskAsync(Uri.AbsoluteUri, OutputPath);
+
+                    if (File.Exists(OutputPath) && new FileInfo(OutputPath).Length == 0)
+                        File.Delete(OutputPath);
+                }
+                catch (AggregateException ex)
+                {
+                    throw ex.Flatten().GetBaseException();
+                }
+                catch (Exception ex)
+                {
+                    throw ex.GetBaseException();
+                }
+            });
         }
 
         /// <summary>

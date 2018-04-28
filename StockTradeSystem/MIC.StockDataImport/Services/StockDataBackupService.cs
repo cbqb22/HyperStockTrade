@@ -38,17 +38,17 @@ namespace MIC.StockDataImport.Services
 
         #endregion
 
-        public async Task BackupAsync()
+        public Task BackupAsync()
         {
-            if (!Directory.Exists(_targetFolder))
-                Directory.CreateDirectory(_targetFolder);
-
-            if (!Directory.Exists(_backUpFolder))
-                Directory.CreateDirectory(_backUpFolder);
-
-
-            await Task.Run(() =>
+            return Task.Run(() =>
             {
+                if (!Directory.Exists(_targetFolder))
+                    Directory.CreateDirectory(_targetFolder);
+
+                if (!Directory.Exists(_backUpFolder))
+                    Directory.CreateDirectory(_backUpFolder);
+
+
                 Directory.GetFiles(_targetFolder, "*.csv", SearchOption.TopDirectoryOnly)
                          .ToList()
                          .ForEach(x =>
@@ -58,8 +58,6 @@ namespace MIC.StockDataImport.Services
                              File.Move(x, outputFile);
                          });
             });
-
-
         }
     }
 }

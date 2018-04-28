@@ -66,10 +66,10 @@ namespace MIC.StockDataImport.ViewModels
             {
                 using (GetProgress("ダウンロード"))
                 {
-                    await _backupService.BackupAsync();
 
                     while (current <= end)
                     {
+                        await _backupService.BackupAsync();
                         await _downloadService.DownloadAsync(current);
                         await _importService.ImportAsync(_downloadService.OutputPath);
 

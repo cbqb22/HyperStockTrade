@@ -7,6 +7,7 @@ using MIC.StockDataImport.Models.Csv;
 using MIC.StockDataImport.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -31,145 +32,100 @@ namespace MIC.StockDataImport.Services
         }
         #endregion
 
-        public async Task<bool> ImportAsync(string FilePath)
+        public Task<bool> ImportAsync(string filePath)
         {
-            if (!File.Exists(FilePath))
-                return false;
+            return Task.Run(() =>
+            {
+                if (!File.Exists(filePath))
+                    return false;
 
-            return await Task.Run(() =>
-                         {
-                             try
-                             {
-                                 var fileName = Path.GetFileNameWithoutExtension(FilePath);
-                                 var dealDate = new DateTime(int.Parse(fileName.Substring(0, 4)), int.Parse(fileName.Substring(4, 2)), int.Parse(fileName.Substring(6, 2)));
+                try
+                {
+                    var fileName = Path.GetFileNameWithoutExtension(filePath);
+                    var dealDate = new DateTime(int.Parse(fileName.Substring(0, 4)), int.Parse(fileName.Substring(4, 2)), int.Parse(fileName.Substring(6, 2)));
 
-                                 var config = new CsvConfiguration() { Encoding = Encoding.GetEncoding(932), HasHeaderRecord = true };
-                                 config.RegisterClassMap<DailyDataMap>();
+                    var config = new CsvConfiguration() { Encoding = Encoding.GetEncoding(932), HasHeaderRecord = true };
+                    config.RegisterClassMap<DailyDataMap>();
 
-                                 //using (var csv = new CsvReader(File.OpenText(FilePath), config))
-                                 using (var sr = new StreamReader(FilePath, Encoding.GetEncoding(932)))
-                                 using (var context = _dataContextFactory.Create())
-                                 using (var tran = context.BeginTransaction())
-                                 {
-                                     var targets = new List<DailyData>();
-                                     var line = "";
+                    //using (var csv = new CsvReader(File.OpenText(FilePath), config))
+                    using (var sr = new StreamReader(filePath, Encoding.GetEncoding(932)))
+                    using (var context = _dataContextFactory.Create())
+                    using (var tran = context.BeginTransaction())
+                    {
+                        var targets = new List<DailyData>();
+                        var line = "";
 
-                                     int counter = 0;
-                                     while ((line = sr.ReadLine()) != null)
-                                     {
-                                         counter++;
-                                         if (counter == 1)
-                                             continue;
+                        int counter = 0;
+                        while ((line = sr.ReadLine()) != null)
+                        {
+                            counter++;
+                            if (counter == 1)
+                                continue;
 
-                                         var sepa = line.Split(',');
+                            var sepa = line.Split(',');
 
-                                         if (!string.IsNullOrWhiteSpace(sepa[0]) && sepa[0].Length != 6)
-                                             continue;
+                            if (!string.IsNullOrWhiteSpace(sepa[0]) && sepa[0].Length != 6)
+                                continue;
 
-                                         targets.Add(new DailyData
-                                         {
-                                             StockMarketCode = sepa[0],
-                                             CompanyName = sepa[1],
-                                             MarketName = sepa[2],
-                                             OpeningPrice = string.IsNullOrWhiteSpace(sepa[3]) ? null : (double?)double.Parse(sepa[3]),
-                                             HighPrice = string.IsNullOrWhiteSpace(sepa[4]) ? null : (double?)double.Parse(sepa[4]),
-                                             LowPrice = string.IsNullOrWhiteSpace(sepa[5]) ? null : (double?)double.Parse(sepa[5]),
-                                             ClosingPrice = string.IsNullOrWhiteSpace(sepa[6]) ? null : (double?)double.Parse(sepa[6]),
-                                             Volume = string.IsNullOrWhiteSpace(sepa[7]) ? 0 : double.Parse(sepa[7]),
-                                             Turnover = string.IsNullOrWhiteSpace(sepa[8]) ? 0 : double.Parse(sepa[8]),
-                                         });
-                                     }
+                            targets.Add(new DailyData
+                            {
+                                StockMarketCode = sepa[0],
+                                CompanyName = sepa[1],
+                                MarketName = sepa[2],
+                                OpeningPrice = string.IsNullOrWhiteSpace(sepa[3]) ? null : (double?)double.Parse(sepa[3]),
+                                HighPrice = string.IsNullOrWhiteSpace(sepa[4]) ? null : (double?)double.Parse(sepa[4]),
+                                LowPrice = string.IsNullOrWhiteSpace(sepa[5]) ? null : (double?)double.Parse(sepa[5]),
+                                ClosingPrice = string.IsNullOrWhiteSpace(sepa[6]) ? null : (double?)double.Parse(sepa[6]),
+                                Volume = string.IsNullOrWhiteSpace(sepa[7]) ? 0 : double.Parse(sepa[7]),
+                                Turnover = string.IsNullOrWhiteSpace(sepa[8]) ? 0 : double.Parse(sepa[8]),
+                            });
+                        }
 
-                                     //var dailyData = csv.GetRecords<DailyData>();
-                                     //var first = dailyData.FirstOrDefault();
-                                     //System.Diagnostics.Debug.WriteLine(first.StockMarketCode);
-                                     //System.Diagnostics.Debug.WriteLine(first.CompanyName);
-                                     //var targets = dailyData.Where(x => !stockCompanyCach.Select(y => y.StockCode + "-" + y.MarketCode).Contains(x.StockMarketCode));
+                        var companies = context.StockCompany.ToList().Select(x => x.StockCode + "_" + x.MarketCode);
+                        var companyTargets = targets.Where(x => !companies.Contains(x.StockMarketCode.Substring(0, 4) + "_" + MarketCodeExtension.GetMarketCodeByMarketName(x.MarketName))).ToList();
 
-                                     var companies = context.StockCompany.ToList().Select(x => x.StockCode + "_" +  x.MarketCode);
+                        if (companyTargets.Any())
+                        {
+                            context.StockCompany.AddRange(companyTargets.Select(x => new StockCompany()
+                            {
+                                CompanyName = x.CompanyName,
+                                StockCode = x.StockMarketCode.Substring(0, 4),
+                                MarketCode = MarketCodeExtension.GetMarketCodeByMarketName(x.MarketName),
+                            }));
+                        }
 
-                                     //var companyTargets = targets.Where(x => !companies.Contains(x.StockMarketCode.Substring(0, 4) + "_" + MarketCodeExtension.GetMarketCodeByMarketName(x.MarketName)))
-                                     //                            .Distinct(new DailyDataEqualityComparer()).ToList();
-                                     var companyTargets = targets.Where(x => !companies.Contains(x.StockMarketCode.Substring(0, 4) + "_" + MarketCodeExtension.GetMarketCodeByMarketName(x.MarketName))).ToList();
+                        context.SaveChanges();
 
-                                     if (companyTargets.Any())
-                                     {
-                                         context.StockCompany.AddRange(companyTargets.Select(x => new StockCompany()
-                                         {
-                                             CompanyName = x.CompanyName,
-                                             StockCode = x.StockMarketCode.Substring(0, 4),
-                                             MarketCode = MarketCodeExtension.GetMarketCodeByMarketName(x.MarketName),
-                                             //DailyPrices = new List<DailyPrice>
-                                             //{
-                                             //    new DailyPrice
-                                             //    {
-                                             //       DealDate = dealDate,
-                                             //       OpeningPrice = x.OpeningPrice,
-                                             //       HighPrice = x.HighPrice,
-                                             //       LowPrice = x.LowPrice,
-                                             //       ClosingPrice = x.ClosingPrice,
-                                             //       Volume = x.Volume,
-                                             //       Turnover = x.Turnover
-                                             //    }
-                                             //}
-                                         }));
-                                     }
+                        var companies2 = context.StockCompany.Select(x => new { x.StockCompanyId, x.StockCode, x.MarketCode }).ToList();
 
-                                     context.SaveChanges();
+                        if (targets.Any())
+                        {
+                            context.DailyPrice.AddRange(targets.Select(x => new DailyPrice()
+                            {
+                                StockCompanyId = companies2.First(y => y.StockCode == x.StockMarketCode.Substring(0, 4) && y.MarketCode == MarketCodeExtension.GetMarketCodeByMarketName(x.MarketName)).StockCompanyId,
+                                DealDate = dealDate,
+                                OpeningPrice = x.OpeningPrice,
+                                HighPrice = x.HighPrice,
+                                LowPrice = x.LowPrice,
+                                ClosingPrice = x.ClosingPrice,
+                                Volume = x.Volume,
+                                Turnover = x.Turnover
+                            }));
+                        }
 
-                                     var companies2 = context.StockCompany.Select(x => new { x.StockCompanyId, x.StockCode, x.MarketCode }).ToList();
+                        context.SaveChanges();
 
-                                     //var list = new List<DailyPrice>();
+                        tran.Commit();
+                    }
+                }
+                catch(Exception ex)
+                {
+                    Debug.WriteLine(string.Format("インポート中にエラーが発生しました。\r\n File:{0} \r\n Message:{1}\r\n Error:{2}", filePath, ex.Message, ex.ToString()));
+                    return false;
+                }
 
-                                     //targets.ForEach(x =>
-                                     //{
-                                     //    var id = companies2.FirstOrDefault(y => y.StockCode == x.StockMarketCode.Substring(0, 4) && y.MarketCode.GetMarketCode() == MarketCodeExtension.GetMarketCodeByMarketName(x.MarketName).GetMarketCode());
-
-                                     //    if (id == null)
-                                     //        return;
-
-                                     //    var dp = new DailyPrice()
-                                     //    {
-                                     //        StockCompanyId = id.StockCompanyId,
-                                     //        DealDate = dealDate,
-                                     //        OpeningPrice = x.OpeningPrice,
-                                     //        HighPrice = x.HighPrice,
-                                     //        LowPrice = x.LowPrice,
-                                     //        ClosingPrice = x.ClosingPrice,
-                                     //        Volume = x.Volume,
-                                     //        Turnover = x.Turnover
-                                     //    };
-
-
-                                     //});
-
-                                     if (targets.Any())
-                                     {
-                                         context.DailyPrice.AddRange(targets.Select(x => new DailyPrice()
-                                         {
-                                             StockCompanyId = companies2.First(y => y.StockCode == x.StockMarketCode.Substring(0, 4) && y.MarketCode == MarketCodeExtension.GetMarketCodeByMarketName(x.MarketName)).StockCompanyId,
-                                             DealDate = dealDate,
-                                             OpeningPrice = x.OpeningPrice,
-                                             HighPrice = x.HighPrice,
-                                             LowPrice = x.LowPrice,
-                                             ClosingPrice = x.ClosingPrice,
-                                             Volume = x.Volume,
-                                             Turnover = x.Turnover
-                                         }));
-                                     }
-
-                                     context.SaveChanges();
-
-                                     tran.Commit();
-                                 }
-                             }
-                             catch
-                             {
-                                 return false;
-                             }
-
-                             return true;
-                         });
+                return true;
+            });
         }
     }
 }

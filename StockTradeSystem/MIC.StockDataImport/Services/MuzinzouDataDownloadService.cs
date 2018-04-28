@@ -26,8 +26,8 @@ namespace MIC.StockDataImport.Services
 
         private const string UrlFormat = "http://souba-data.com/k_data/{0}/{1}_{2}/T{3}{4}";  //http://souba-data.com/k_data/2017/17_01/T170104.zip 2014年以前は.lzh
         private const string FileNameFormat = "T{0}";
-        private string OutputZip = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"Stock\Muzinzou", "Zip");
-        private string Output = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"Stock\Muzinzou");
+        private readonly string outputZip = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"Stock\Muzinzou", "Zip");
+        private readonly string output = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"Stock\Muzinzou");
         #endregion
 
         #region Properties
@@ -45,8 +45,8 @@ namespace MIC.StockDataImport.Services
             _dataContextFactory = factory;
             _holidayCheckService = holidayCheckService;
 
-            if (!Directory.Exists(OutputZip))
-                Directory.CreateDirectory(OutputZip);
+            if (!Directory.Exists(outputZip))
+                Directory.CreateDirectory(outputZip);
         }
 
         #endregion
@@ -54,50 +54,50 @@ namespace MIC.StockDataImport.Services
 
         private Func<DateTime, FileExt> GetCompression = (dt) => dt.Year <= 2014 ? FileExt.Lzh : FileExt.Zip;
 
-        public async Task DownloadAsync(DateTime date)
+        public Task DownloadAsync(DateTime date)
         {
-            if (_holidayCheckService.IsHoliday(date))
-                return;
-
-            if (IsImported(date))
-                return;
-
-            var compression = GetCompression(date);
-
-            OutputPath = Path.Combine(Output, string.Format(FileNameFormat , date.ToString("yyMMdd")) + ".csv"); // T170104.csv
-            Uri = new Uri(string.Format(UrlFormat, date.ToString("yyyy"), date.ToString("yy"), date.ToString("MM"), date.ToString("yyMMdd"), compression.GetExtension()));
-
-            if (!RemoteFileExists(Uri.AbsoluteUri))
-                return;
-
-            try
+            return Task.Run(async () =>
             {
-                var outputZip = Path.Combine(OutputZip, string.Format(FileNameFormat , date.ToString("yyMMdd")) + compression.GetExtension());
+                if (_holidayCheckService.IsHoliday(date))
+                    return;
 
-                var wc = new WebClient();
-                await wc.DownloadFileTaskAsync(Uri.AbsoluteUri, outputZip);
+                if (IsImported(date))
+                    return;
 
-                if (File.Exists(OutputPath) && new FileInfo(OutputPath).Length == 0)
-                    File.Delete(OutputPath);
+                var compression = GetCompression(date);
 
-                // ZIP解凍処理
-                if (compression == FileExt.Zip)
-                    ZipFile.ExtractToDirectory(outputZip, Output);
-                // Lzh解凍処理
-                else
-                    UnlhaManager.UnLzh(outputZip, Output);
+                OutputPath = Path.Combine(output, string.Format(FileNameFormat, date.ToString("yyMMdd")) + ".csv"); // T170104.csv
+                Uri = new Uri(string.Format(UrlFormat, date.ToString("yyyy"), date.ToString("yy"), date.ToString("MM"), date.ToString("yyMMdd"), compression.GetExtension()));
 
+                if (!RemoteFileExists(Uri.AbsoluteUri))
+                    return;
 
+                try
+                {
+                    var outputZip = Path.Combine(this.outputZip, string.Format(FileNameFormat, date.ToString("yyMMdd")) + compression.GetExtension());
 
-            }
-            catch (AggregateException ex)
-            {
-                throw ex.Flatten().GetBaseException();
-            }
-            catch (Exception ex)
-            {
-                throw ex.GetBaseException();
-            }
+                    var wc = new WebClient();
+                    await wc.DownloadFileTaskAsync(Uri.AbsoluteUri, outputZip);
+
+                    if (File.Exists(OutputPath) && new FileInfo(OutputPath).Length == 0)
+                        File.Delete(OutputPath);
+
+                    // ZIP解凍処理
+                    if (compression == FileExt.Zip)
+                        ZipFile.ExtractToDirectory(outputZip, output);
+                    // Lzh解凍処理
+                    else
+                        UnlhaManager.UnLzh(outputZip, output);
+                }
+                catch (AggregateException ex)
+                {
+                    throw ex.Flatten().GetBaseException();
+                }
+                catch (Exception ex)
+                {
+                    throw ex.GetBaseException();
+                }
+            });
         }
 
         /// <summary>
