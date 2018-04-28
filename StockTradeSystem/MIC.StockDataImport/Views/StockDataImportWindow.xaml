@@ -5,11 +5,13 @@
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterOwner"
         DataContext="{Binding StockDataImportViewModel, Source={StaticResource Locator}}"
+        IsHitTestVisible="{Binding IsProgress, Mode=OneWay,Converter={StaticResource BooleanReverseConverter}}"
         >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MIC.Common;component/Resources/ProgressStyle.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MIC.Common;component/Resources/Converters.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>

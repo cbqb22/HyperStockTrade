@@ -87,6 +87,7 @@
     <Compile Include="Commands\AsyncRelayCommand.cs" />
     <Compile Include="Commands\Interfaces\IAsyncCommand.cs" />
     <Compile Include="Consts\FolderPaths.cs" />
+    <Compile Include="Converters\BooleanReverseConverter.cs" />
     <Compile Include="Date\HolidayChecker.cs" />
     <Compile Include="Date\Services\Interfaces\IHolidayCheckService.cs" />
     <Compile Include="Date\Services\ToshoStockExchangeHolidayCheckService.cs" />
@@ -119,6 +120,10 @@
     <Content Include="Archives\Lzhs\UNLHA32.DLL" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Resources\Converters.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\ProgressStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

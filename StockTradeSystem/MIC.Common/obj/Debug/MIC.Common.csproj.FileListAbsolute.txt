@@ -79,3 +79,6 @@ C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Common\obj\Debug
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Common\obj\Debug\MIC.Common.g.resources
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Common\obj\Debug\MIC.Common.dll
 C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Common\obj\Debug\MIC.Common.pdb
+C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Common\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Common\obj\Debug\MIC.Common_MarkupCompile.lref
+C:\Users\poohace\Documents\HyperStockTrade\StockTradeSystem\MIC.Common\obj\Debug\Resources\Converters.baml
