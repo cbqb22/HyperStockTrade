@@ -3,9 +3,11 @@ using GalaSoft.MvvmLight.Command;
 using MIC.Common.Commands.Interfaces;
 using MIC.Common.ViewModelBases;
 using MIC.StockDataImport.Services.Interfaces;
+using MIC.Common.Dialogs.Extensions;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MIC.StockDataImport.ViewModels
 {
@@ -54,21 +56,31 @@ namespace MIC.StockDataImport.ViewModels
             DownloadCommand = new AsyncRelayCommand(DownloadAsync);
         }
 
+        //[SuppressMessage("Compiler", "CS4014")]
         private async Task DownloadAsync()
         {
             var current = _startDate;
             var end = _endDate;
 
-            using (GetProgress("ダウンロード"))
+            try
             {
-                while (current <= end)
+                using (GetProgress("ダウンロード"))
                 {
                     await _backupService.BackupAsync();
-                    await _downloadService.DownloadAsync(current);
-                    await _importService.ImportAsync(_downloadService.OutputPath);
 
-                    current = current.AddDays(1);
+                    while (current <= end)
+                    {
+                        await _downloadService.DownloadAsync(current);
+                        await _importService.ImportAsync(_downloadService.OutputPath);
+
+                        current = current.AddDays(1);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+#pragma warning disable 4014
+                this.RequestShowDialog("Error", ex.Message);
             }
         }
     }

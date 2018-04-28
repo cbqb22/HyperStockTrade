@@ -29,6 +29,11 @@ namespace MIC.Database.Commons.Enums
         TSE_Foreign = 14,
 
         /// <summary>
+        /// ＪＱ２（グロース、スタンダード、スタンダード外国含む）
+        /// </summary>
+        JQ2 = 19,
+
+        /// <summary>
         /// 名古屋一部
         /// </summary>
         NSE1 = 31,
@@ -96,6 +101,7 @@ namespace MIC.Database.Commons.Enums
                     return MarketCode.TSE_Mothers;
 
                 case MuzionzouMarketCode.JQ:
+                case MuzionzouMarketCode.JQ2:
                     return MarketCode.JQ;
 
                 case MuzionzouMarketCode.FSE:

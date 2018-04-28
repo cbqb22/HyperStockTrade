@@ -123,8 +123,9 @@ namespace MIC.StockDataImport.Services
                                      tran.Commit();
                                  }
                              }
-                             catch
+                             catch (Exception ex)
                              {
+                                 System.Diagnostics.Debug.WriteLine(string.Format("インポート中にエラーが発生しました。\r\n File:{0}\r\n Message:{1}\r\n StackTrade:{2}", FilePath, ex.Message, ex.StackTrace));
                                  return false;
                              }
 
