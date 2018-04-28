@@ -96,8 +96,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Services\DailyDataDownloadService.cs" />
-    <Compile Include="Services\DailyDataImportService.cs" />
     <Compile Include="Services\Interfaces\IStockDataBackupService.cs" />
     <Compile Include="Services\Interfaces\IStockDataDownloadService.cs" />
     <Compile Include="Services\Interfaces\IStockDataImportService.cs" />
