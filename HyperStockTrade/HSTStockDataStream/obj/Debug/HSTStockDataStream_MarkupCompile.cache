@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTStockDataStream\obj\Debug\
+C:\Users\poohace\Documents\HyperStockTrade\HyperStockTrade\HSTStockDataStream\obj\Debug\
 HSTStockDataStream
 none
 false
-CODE_ANALYSIS;DEBUG;TRACE
-C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTStockDataStream\App.xaml
+DEBUG;TRACE
+C:\Users\poohace\Documents\HyperStockTrade\HyperStockTrade\HSTStockDataStream\App.xaml
 11151548125
 
 91852214003
-151954215905
+15-435686512
 MainWindow.xaml;
 
 False

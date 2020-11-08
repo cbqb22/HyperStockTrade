@@ -5,3 +5,8 @@ C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTCommon
 C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTCommon\obj\Debug\HSTCommon.pdb
 C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTCommon\bin\Debug\HSTCommon.dll.CodeAnalysisLog.xml
 C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTCommon\bin\Debug\HSTCommon.dll.lastcodeanalysissucceeded
+C:\Users\poohace\Documents\HyperStockTrade\HyperStockTrade\HSTCommon\bin\Debug\HSTCommon.dll
+C:\Users\poohace\Documents\HyperStockTrade\HyperStockTrade\HSTCommon\bin\Debug\HSTCommon.pdb
+C:\Users\poohace\Documents\HyperStockTrade\HyperStockTrade\HSTCommon\obj\Debug\HSTCommon.csprojResolveAssemblyReference.cache
+C:\Users\poohace\Documents\HyperStockTrade\HyperStockTrade\HSTCommon\obj\Debug\HSTCommon.dll
+C:\Users\poohace\Documents\HyperStockTrade\HyperStockTrade\HSTCommon\obj\Debug\HSTCommon.pdb

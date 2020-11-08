@@ -10,6 +10,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace MIC.StockDataImport.Services
 {
@@ -24,7 +25,15 @@ namespace MIC.StockDataImport.Services
 
         #region Fields
 
-        private const string UrlFormat = "http://souba-data.com/k_data/{0}/{1}_{2}/T{3}{4}";  //http://souba-data.com/k_data/2017/17_01/T170104.zip 2014年以前は.lzh
+        // 2014年以前は.lzh
+        // 2019年12月31日迄は souba-data.com
+        // 2020年01月01日～は muzinzou.com
+        private Dictionary<DateTime, string> prefixDic = new Dictionary<DateTime, string>() 
+        {
+            { new DateTime(2020,01,01), "http://mujinzou.com/k_data/{0}/{1}_{2}/T{3}{4}" },
+            { new DateTime(1900,01,01), "http://souba-data.com/k_data/{0}/{1}_{2}/T{3}{4}" }
+        };
+
         private const string FileNameFormat = "T{0}";
         private readonly string outputZip = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"Stock\Muzinzou", "Zip");
         private readonly string output = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"Stock\Muzinzou");
@@ -67,7 +76,7 @@ namespace MIC.StockDataImport.Services
                 var compression = GetCompression(date);
 
                 OutputPath = Path.Combine(output, string.Format(FileNameFormat, date.ToString("yyMMdd")) + ".csv"); // T170104.csv
-                Uri = new Uri(string.Format(UrlFormat, date.ToString("yyyy"), date.ToString("yy"), date.ToString("MM"), date.ToString("yyMMdd"), compression.GetExtension()));
+                Uri = new Uri(string.Format(MakeUrlFormat(date), date.ToString("yyyy"), date.ToString("yy"), date.ToString("MM"), date.ToString("yyMMdd"), compression.GetExtension()));
 
                 if (!RemoteFileExists(Uri.AbsoluteUri))
                     return;
@@ -139,5 +148,20 @@ namespace MIC.StockDataImport.Services
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        private string MakeUrlFormat(DateTime date)
+        {
+            foreach (var kvp in prefixDic)
+            {
+                if (kvp.Key <= date)
+                    return kvp.Value;
+            }
+
+            throw new ArgumentException("適切なPrefixが見つかりませんでした。");
+        }
     }
 }

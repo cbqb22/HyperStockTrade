@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTMarketSpeed\obj\Debug\
+C:\Users\poohace\Documents\HyperStockTrade\HyperStockTrade\HSTMarketSpeed\obj\Debug\
 HSTMarketSpeed
 none
 false
-CODE_ANALYSIS;DEBUG;TRACE
-C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTMarketSpeed\App.xaml
+DEBUG;TRACE
+C:\Users\poohace\Documents\HyperStockTrade\HyperStockTrade\HSTMarketSpeed\App.xaml
 11151548125
 
 101125182766
-14-205747531
+14-189885053
 MainWindow.xaml;
 
 False

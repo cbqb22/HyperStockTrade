@@ -22,7 +22,7 @@ namespace StockAnalyzer.Services
         #region Fields
 
         private int _limitLowPrice = 150;
-        private int _minTurnover = 500 * 10000;
+        private int _minTurnover = 500 * 10000; // 売買代金500万
 
         #endregion
 
@@ -47,34 +47,72 @@ namespace StockAnalyzer.Services
         {
             using (var context = _dataContextFactory.Create())
             {
+                var targetData = context.StockCompany
+                                    .GroupBy(x => new { x.MarketCode, x.StockCode, x.CompanyName })
+                                    .Select(x => new
+                                    {
+                                        x.Key.MarketCode,
+                                        x.Key.StockCode,
+                                        x.Key.CompanyName,
+                                        DailyPrices = x.FirstOrDefault().DailyPrices.Where(d => start <= d.DealDate && d.DealDate <= end)
+                                    })
+                                    .Select(x => new
+                                    {
+                                        x.StockCode,
+                                        x.MarketCode,
+                                        x.CompanyName,
+                                        x.DailyPrices,
+                                        AveragePrice = x.DailyPrices.Average(xx => xx.ClosingPrice),
+                                        CurrentPrice = x.DailyPrices.OrderByDescending(p => p.DealDate).FirstOrDefault().ClosingPrice,
+                                        MaxPrice = x.DailyPrices.Max(m => m.HighPrice),
+                                        MinPrice = x.DailyPrices.Where(d => d.LowPrice != 0).Min(m => m.LowPrice),
+                                        AverageVolume = x.DailyPrices.Average(d => d.Volume),
+                                        Average10Volume = x.DailyPrices.OrderByDescending(d => d.DealDate).Take(10).Average(d => d.Volume),
+                                        MaxVolume = x.DailyPrices.Max(d => d.Volume)
+                                    });
                 switch (type)
                 {
                     case AnalyzeType.Type1:
 
-                        var picked = context.StockCompany
-                                            .GroupBy(x => new { x.MarketCode, x.StockCode, x.CompanyName })
-                                            .Select(x => new { x.Key.MarketCode, x.Key.StockCode, x.Key.CompanyName, DailyPrices = x.FirstOrDefault().DailyPrices.Where(d => start <= d.DealDate && d.DealDate <= end) })
-                                            .Select(x => new { x.StockCode, x.MarketCode, x.CompanyName, x.DailyPrices, AveragePrice = x.DailyPrices.Average(xx => xx.ClosingPrice), CurrentPrice = x.DailyPrices.OrderByDescending(p => p.DealDate).FirstOrDefault().ClosingPrice, MaxPrice = x.DailyPrices.Max(m => m.ClosingPrice), MinPrice = x.DailyPrices.Where(d => d.ClosingPrice != 0).Min(m => m.ClosingPrice), AverageVolume = x.DailyPrices.Average(d => d.Volume)  , Average10Volume = x.DailyPrices.OrderByDescending(d => d.DealDate).Take(10).Average(d => d.Volume), MaxVolume = x.DailyPrices.Max(d => d.Volume) })
-                                            .Where(x => x.MarketCode == MarketCode.TSE_Mothers || x.MarketCode == MarketCode.JQ)
-                                            .Where(x => _minTurnover <= x.DailyPrices.Average(a => a.Turnover))
-                                            .Where(x => 5 <= x.DailyPrices.Where(d => x.AverageVolume * 5 <= d.Volume).Count())
-                                            .Where(x => x.CurrentPrice <= x.AveragePrice && x.AveragePrice <= x.CurrentPrice * 1.2)
-                                            .Select(x => new PickedStockData
-                                            {
-                                                //StockCompanyId = x.StockCompanyId,
-                                                StockCode = x.StockCode,
-                                                MarketCode = x.MarketCode,
-                                                CompanyName = x.CompanyName,
-                                                CurrentPrice = x.CurrentPrice,
-                                                MaxPrice = x.MaxPrice,
-                                                MinPrice = x.MinPrice,
-                                                AverageVolume = (int)x.AverageVolume,
-                                                MaxVolume = x.MaxVolume
-                                            })
+                        return targetData.Where(x => x.MarketCode == MarketCode.TSE_Mothers || x.MarketCode == MarketCode.JQ)
+                                         .Where(x => _minTurnover <= x.DailyPrices.Average(a => a.Turnover))
+                                         .Where(x => 5 <= x.DailyPrices.Where(d => x.AverageVolume * 5 <= d.Volume).Count())
+                                         .Where(x => x.CurrentPrice <= x.AveragePrice && x.AveragePrice <= x.CurrentPrice * 1.2)
+                                         .Select(x => new PickedStockData
+                                         {
+                                             StockCode = x.StockCode,
+                                             MarketCode = x.MarketCode,
+                                             CompanyName = x.CompanyName,
+                                             CurrentPrice = x.CurrentPrice,
+                                             MaxPrice = x.MaxPrice,
+                                             MinPrice = x.MinPrice,
+                                             AverageVolume = (int)x.AverageVolume,
+                                             MaxVolume = x.MaxVolume
+                                         })
                                             .Where(x => _limitLowPrice <= x.CurrentPrice)
                                             .ToList();
 
-                        return picked;
+                    // 最新日付～過去２ヶ月で検索
+                    case AnalyzeType.Type2:
+
+                        return targetData.Where(x => x.MarketCode == MarketCode.TSE_Mothers || x.MarketCode == MarketCode.JQ)
+                                         //.Where(x => _minTurnover <= x.DailyPrices.Average(a => a.Turnover))
+                                         .Where(x => 1 <= x.DailyPrices.Where(d => x.AverageVolume * 10 <= d.Volume).Count())
+                                         .Where(x => x.CurrentPrice <= x.AveragePrice && x.AveragePrice <= x.CurrentPrice * 1.2)
+                                         .Select(x => new PickedStockData
+                                         {
+                                             StockCode = x.StockCode,
+                                             MarketCode = x.MarketCode,
+                                             CompanyName = x.CompanyName,
+                                             CurrentPrice = x.CurrentPrice,
+                                             MaxPrice = x.MaxPrice,
+                                             MinPrice = x.MinPrice,
+                                             AverageVolume = (int)x.AverageVolume,
+                                             MaxVolume = x.MaxVolume
+                                         })
+                                            .Where(x => _limitLowPrice <= x.CurrentPrice)
+                                            .ToList();
+
                 }
 
             }

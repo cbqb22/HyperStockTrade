@@ -9,5 +9,6 @@ namespace StockAnalyzer.Models
     public enum AnalyzeType
     {
         Type1,
+        Type2,
     }
 }

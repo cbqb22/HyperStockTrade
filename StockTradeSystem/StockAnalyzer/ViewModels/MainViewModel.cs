@@ -153,7 +153,7 @@ namespace StockAnalyzer.ViewModels
             {
                 if (EndDate <= StartDate)
                     return;
-                await Task.Run(() => PickedStockDataList = _analyzeService.Analyze(StartDate, EndDate, AnalyzeType.Type1));
+                await Task.Run(() => PickedStockDataList = _analyzeService.Analyze(StartDate, EndDate, AnalyzeType.Type2));
             }
         }
 

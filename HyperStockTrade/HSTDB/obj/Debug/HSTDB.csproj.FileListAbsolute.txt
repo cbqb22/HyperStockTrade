@@ -6,3 +6,9 @@ C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTDB\obj
 C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTDB\bin\Debug\HSTDB.dll.CodeAnalysisLog.xml
 C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTDB\bin\Debug\HSTDB.dll.lastcodeanalysissucceeded
 C:\Users\poohace\Documents\Visual Studio 2013\Projects\HyperStockTrade\HSTDB\obj\Debug\HSTDB.csprojResolveAssemblyReference.cache
+C:\Users\poohace\Documents\HyperStockTrade\HyperStockTrade\HSTDB\bin\Debug\HSTDB.dll.config
+C:\Users\poohace\Documents\HyperStockTrade\HyperStockTrade\HSTDB\bin\Debug\HSTDB.dll
+C:\Users\poohace\Documents\HyperStockTrade\HyperStockTrade\HSTDB\bin\Debug\HSTDB.pdb
+C:\Users\poohace\Documents\HyperStockTrade\HyperStockTrade\HSTDB\obj\Debug\HSTDB.csprojResolveAssemblyReference.cache
+C:\Users\poohace\Documents\HyperStockTrade\HyperStockTrade\HSTDB\obj\Debug\HSTDB.dll
+C:\Users\poohace\Documents\HyperStockTrade\HyperStockTrade\HSTDB\obj\Debug\HSTDB.pdb
